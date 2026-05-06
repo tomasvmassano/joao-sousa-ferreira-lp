@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local dev environment (não publicar)
+.claude/
+
+# Brand assets / references (não publicar — pesados e privados)
+*.pdf
+figma-screenshots/
+
+# Source images originais (servimos as versões otimizadas em assets/img/)
+jsf-image.jpg
+jsf-profilepicture.png
