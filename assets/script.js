@@ -44,7 +44,7 @@
 
   // ---------- reveal on scroll ----------
   const revealTargets = document.querySelectorAll(
-    '.section-head, .problems__item, .howto__step, .area, .about__content > *, .faq__item, .booking__aside, .booking__form'
+    '.section-head, .problems__item, .problems__cta, .howto__step, .howto__timeline, .howto__callout, .area, .about__content > *, .faq__item, .booking__aside, .booking__form, .hero__proof'
   );
   revealTargets.forEach(el => el.classList.add('reveal'));
 
@@ -235,13 +235,61 @@
     };
 
     renderCal();
+    renderSlotsPreview();
 
-    // form submit
+    // PRÓXIMOS HORÁRIOS — 3 slots futuros em destaque, acima do calendário
+    function renderSlotsPreview() {
+      const preview = document.querySelector('[data-slots-preview-list]');
+      if (!preview) return;
+      const upcoming = [];
+      const cursor = new Date(today);
+      // varrer próximos 14 dias até reunir 3 slots
+      for (let i = 0; i < 14 && upcoming.length < 3; i++) {
+        const slots = slotsForDate(cursor);
+        if (slots.length > 0) {
+          const label = i === 0 ? 'hoje' : i === 1 ? 'amanhã' : cursor.toLocaleDateString('pt-PT', { weekday: 'short', day: 'numeric' });
+          upcoming.push({ date: new Date(cursor), label, time: slots[0] });
+          if (slots.length > 1 && upcoming.length < 3) {
+            upcoming.push({ date: new Date(cursor), label, time: slots[1] });
+          }
+        }
+        cursor.setDate(cursor.getDate() + 1);
+      }
+      preview.innerHTML = upcoming.map(u => `
+        <li>
+          <button type="button" class="slots-preview__slot" data-preview-date="${fmt(u.date)}" data-preview-slot="${u.time}">
+            <span class="slots-preview__day">${u.label}</span>
+            <span class="slots-preview__time">${u.time}</span>
+          </button>
+        </li>
+      `).join('') + `
+        <li>
+          <a href="#agendar-cal" class="slots-preview__more" data-track="slots_preview_more">Ver mais &rarr;</a>
+        </li>
+      `;
+      preview.querySelectorAll('[data-preview-date]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const [y, m, d] = btn.dataset.previewDate.split('-').map(Number);
+          selectedDate = new Date(y, m - 1, d);
+          selectedSlot = btn.dataset.previewSlot;
+          viewMonth = selectedDate.getMonth();
+          viewYear = selectedDate.getFullYear();
+          renderCal();
+          renderSlots();
+          slotsStep.hidden = false;
+          formStep.hidden = false;
+          formStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          track('slot_preview_selected', { date: btn.dataset.previewDate, slot: btn.dataset.previewSlot });
+        });
+      });
+    }
+
+    // form submit — sem pagamento online, apenas reserva (pagamento por fatura após consulta)
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!selectedDate || !selectedSlot) {
         slotsStep.hidden = false;
-        alert('Escolhe uma data e um horário antes de continuar.');
+        alert('Escolha uma data e um horário antes de continuar.');
         return;
       }
       if (!form.reportValidity()) return;
@@ -250,23 +298,23 @@
       data.date = fmt(selectedDate);
       data.slot = selectedSlot;
 
-      track('initiate_checkout', { area: data.area, modality: data.modality });
+      track('initiate_booking', { area: data.area, modality: data.modality });
 
-      // === INTEGRAÇÃO DE PAGAMENTO (a definir) ===============
-      // Stripe Checkout, Easypay, MB WAY API ou outro.
-      // Substituir o bloco abaixo por chamada ao backend que
-      // cria a sessão de pagamento e devolve o redirect URL.
+      // === INTEGRAÇÃO DE BACKEND (a definir) =================
+      // POST → endpoint que grava a reserva, envia briefing por e-mail
+      // e notifica o João. NÃO há cobrança neste passo — a fatura
+      // é emitida após a consulta.
       // =======================================================
       const submitBtn = form.querySelector('[data-submit]');
       submitBtn.disabled = true;
-      submitBtn.textContent = 'A processar...';
+      submitBtn.textContent = 'A confirmar...';
 
       setTimeout(() => {
         // simulação de sucesso
         form.querySelectorAll('.booking__step').forEach(s => s.hidden = true);
         successEl.hidden = false;
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        track('purchase', { value: 100, currency: 'EUR', area: data.area });
+        track('booking_confirmed', { value: 100, currency: 'EUR', area: data.area, modality: data.modality });
       }, 900);
     });
   }

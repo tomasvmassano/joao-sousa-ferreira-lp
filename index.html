@@ -27,15 +27,17 @@ NAV — minimal, sticky on scroll
     <nav class="nav__links" aria-label="Secções">
       <a href="#areas">Áreas</a>
       <a href="#como-funciona">Como funciona</a>
+      <a href="#problemas">Casos típicos</a>
       <a href="#sobre">Sobre</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav__end">
-      <div class="lang" role="group" aria-label="Idioma">
-        <button type="button" class="lang__btn lang__btn--active" aria-pressed="true">PT</button>
-        <span class="lang__sep" aria-hidden="true">/</span>
-        <a href="/en" class="lang__btn" aria-pressed="false">EN</a>
-      </div>
+      <a href="tel:+351211382748" class="nav__phone" data-track="nav_phone_click" aria-label="Ligar para +351 211 382 748">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 3.5C3 3 3.4 2.5 4 2.5h2c.4 0 .8.3.9.7l.7 2.4c.1.4 0 .8-.3 1L6 7.8c.9 1.7 2.4 3.2 4.1 4.1l1.2-1.3c.3-.3.7-.4 1.1-.3l2.4.7c.4.1.7.5.7.9v2c0 .5-.4 1-1 1A12 12 0 013 3.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <span>211&nbsp;382&nbsp;748</span>
+      </a>
       <a href="#agendar" class="btn btn--primary nav__cta" data-track="nav_cta_click">Agendar consulta</a>
     </div>
   </div>
@@ -50,9 +52,8 @@ NAV — minimal, sticky on scroll
     <div class="hero__grid">
 
       <div class="hero__content">
-        <!-- HEADLINE: a fechar com o João. Placeholder neutro, cumpre o Estatuto da OA -->
         <h1 class="hero__headline">
-          A sua consulta jurídica, <span class="hero__headline-accent">marcada em minutos.</span>
+          Saiba exatamente o que fazer no seu caso jurídico. <span class="hero__headline-accent">Em 1&nbsp;hora.</span>
         </h1>
 
         <p class="hero__sub">
@@ -67,14 +68,27 @@ NAV — minimal, sticky on scroll
               <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="#como-funciona" class="btn btn--ghost btn--lg" data-track="hero_secondary_click">
+          <a href="#como-funciona" class="link-arrow" data-track="hero_secondary_click">
             Como funciona
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
         </div>
 
-        <p class="hero__microtrust">
-          Sócio fundador da <a href="https://sfba.pt" target="_blank" rel="noopener">SFBA — Sociedade de Advogados</a>
-        </p>
+        <!-- HERO PROOF — bloco discreto de credibilidade institucional -->
+        <div class="hero__proof" aria-label="Credibilidade">
+          <div class="hero__proof-item">
+            <span class="hero__proof-stars" aria-hidden="true">★★★★★</span>
+            <span class="hero__proof-label">Avaliação Google Business <span data-placeholder>[a confirmar]</span></span>
+          </div>
+          <span class="hero__proof-divider" aria-hidden="true"></span>
+          <div class="hero__proof-item">
+            <span class="hero__proof-mark">FDUL</span>
+            <span class="hero__proof-mark">OA</span>
+            <span class="hero__proof-label">Sócio fundador da <a href="https://sfba.pt" target="_blank" rel="noopener">SFBA</a></span>
+          </div>
+        </div>
       </div>
 
       <div class="hero__visual">
@@ -107,16 +121,16 @@ NAV — minimal, sticky on scroll
     <div class="container">
       <div class="trust__grid">
         <div class="trust__item">
-          <span class="trust__num">2024</span>
-          <span class="trust__label">Inscrito na OA</span>
+          <span class="trust__num">20+</span>
+          <span class="trust__label">Anos de prática jurídica na família</span>
         </div>
         <div class="trust__item">
-          <span class="trust__num">3</span>
+          <span class="trust__num">7</span>
           <span class="trust__label">Áreas de prática</span>
         </div>
         <div class="trust__item">
           <span class="trust__num">3</span>
-          <span class="trust__label">Idiomas</span>
+          <span class="trust__label">Idiomas &middot; PT · EN · ES</span>
         </div>
         <div class="trust__item">
           <span class="trust__num">SFBA</span>
@@ -143,25 +157,56 @@ NAV — minimal, sticky on scroll
       <ol class="problems__list" role="list">
         <li class="problems__item">
           <span class="problems__num">01</span>
+          <span class="problems__tag" data-area="sucessoes">Heranças</span>
           <p>Tem uma herança em aberto há meses e ninguém avança.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">02</span>
+          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
           <p>Vai comprar casa e o contrato veio com letras pequenas.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">03</span>
-          <p>Recebeu uma proposta de partilha e quer saber se está justa.</p>
+          <span class="problems__tag" data-area="laboral">Laboral</span>
+          <p>Foi despedido e precisa de saber se a indemnização proposta é justa.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">04</span>
-          <p>Vai abrir uma empresa ou rever um contrato com sócios.</p>
+          <span class="problems__tag" data-area="familia">Família</span>
+          <p>Está em processo de divórcio e quer perceber os seus direitos.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">05</span>
+          <span class="problems__tag" data-area="fiscal">Fiscal</span>
+          <p>Recebeu uma notificação das Finanças e não sabe como responder.</p>
+        </li>
+        <li class="problems__item">
+          <span class="problems__num">06</span>
+          <span class="problems__tag" data-area="laboral">Laboral</span>
+          <p>Trabalha em recibos verdes mas suspeita que há vínculo laboral.</p>
+        </li>
+        <li class="problems__item">
+          <span class="problems__num">07</span>
+          <span class="problems__tag" data-area="empresarial">Empresarial</span>
+          <p>Vai abrir uma empresa ou rever um acordo com sócios.</p>
+        </li>
+        <li class="problems__item">
+          <span class="problems__num">08</span>
+          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
           <p>É senhorio e o inquilino deixou de pagar há meses.</p>
         </li>
       </ol>
+
+      <!-- CTA contextual: reconheceu o caso? -->
+      <div class="problems__cta">
+        <p>Reconhece o seu caso?</p>
+        <a href="#agendar" class="btn btn--primary" data-track="problems_cta_click">
+          Agendar consulta agora
+          <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -180,12 +225,12 @@ NAV — minimal, sticky on scroll
         <li class="howto__step">
           <span class="howto__num">01</span>
           <h3 class="howto__title">Escolha data e hora</h3>
-          <p class="howto__desc">Calendário com slots em tempo real. Seleciona a área da consulta.</p>
+          <p class="howto__desc">Calendário com slots em tempo real. Selecione a área da consulta.</p>
         </li>
         <li class="howto__step">
           <span class="howto__num">02</span>
           <h3 class="howto__title">Confirme a reserva</h3>
-          <p class="howto__desc">Pagamento seguro online — cartão ou MB&nbsp;WAY. Slot fica garantido no momento.</p>
+          <p class="howto__desc">A consulta tem o custo fixo de 100&nbsp;€, pagos por fatura após a sessão. Slot fica garantido no momento.</p>
         </li>
         <li class="howto__step">
           <span class="howto__num">03</span>
@@ -195,9 +240,39 @@ NAV — minimal, sticky on scroll
         <li class="howto__step">
           <span class="howto__num">04</span>
           <h3 class="howto__title">O dia da consulta</h3>
-          <p class="howto__desc">1&nbsp;hora com análise direta. Online ou presencial em Lisboa.</p>
+          <p class="howto__desc">1&nbsp;hora com análise direta, online ou no escritório em Lisboa. Sai com:</p>
+          <ul class="howto__deliver">
+            <li>Análise jurídica do caso</li>
+            <li>Plano de ação por escrito</li>
+            <li>Estimativa de custos para passos seguintes</li>
+            <li>Sumário enviado em 48h</li>
+          </ul>
         </li>
       </ol>
+
+      <!-- TIMELINE visual: fluxo end-to-end -->
+      <ol class="howto__timeline" aria-label="Fluxo da consulta">
+        <li><span class="howto__timeline-step">Reserva</span></li>
+        <li class="howto__timeline-arrow" aria-hidden="true">→</li>
+        <li><span class="howto__timeline-step">Confirmação em 2h</span></li>
+        <li class="howto__timeline-arrow" aria-hidden="true">→</li>
+        <li><span class="howto__timeline-step">Briefing automático</span></li>
+        <li class="howto__timeline-arrow" aria-hidden="true">→</li>
+        <li><span class="howto__timeline-step">Consulta</span></li>
+        <li class="howto__timeline-arrow" aria-hidden="true">→</li>
+        <li><span class="howto__timeline-step">Fatura</span></li>
+      </ol>
+
+      <!-- CALLOUT diferenciador: pagamento por fatura -->
+      <div class="howto__callout" role="note">
+        <span class="howto__callout-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+        </span>
+        <div>
+          <strong>Sem cartão no momento da marcação.</strong>
+          <span>Paga 100&nbsp;€ por fatura, após a consulta.</span>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -209,10 +284,10 @@ NAV — minimal, sticky on scroll
     <div class="container">
       <header class="section-head">
         <p class="eyebrow">Áreas de prática</p>
-        <h2 class="section-title">Três áreas. Uma porta de entrada.</h2>
+        <h2 class="section-title">Sete áreas. Uma porta de entrada.</h2>
       </header>
 
-      <div class="areas__grid areas__grid--three">
+      <div class="areas__grid">
 
         <article class="area">
           <span class="area__num">01</span>
@@ -221,6 +296,7 @@ NAV — minimal, sticky on scroll
           </div>
           <h3 class="area__name">Imobiliário</h3>
           <p class="area__desc">Compra e venda, arrendamento, condomínios, usufruto e disputas com inquilinos ou senhorios.</p>
+          <p class="area__case"><em>Caso típico:</em> revisão de contrato-promessa antes de assinar.</p>
         </article>
 
         <article class="area">
@@ -228,20 +304,67 @@ NAV — minimal, sticky on scroll
           <div class="area__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 1-4.5 4.4L18 21l-6-3.2L6 21l1.5-6.6L3 10l6-1z"/></svg>
           </div>
-          <h3 class="area__name">Heranças</h3>
-          <p class="area__desc">Testamentos, partilhas, legados e processos sucessórios em aberto.</p>
+          <h3 class="area__name">Sucessões</h3>
+          <p class="area__desc">Heranças, testamentos, partilhas, legados e processos sucessórios em aberto.</p>
+          <p class="area__case"><em>Caso típico:</em> partilha bloqueada entre herdeiros há meses.</p>
         </article>
 
         <article class="area">
           <span class="area__num">03</span>
           <div class="area__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM2 21a8 8 0 0120 0"/></svg>
+          </div>
+          <h3 class="area__name">Família</h3>
+          <p class="area__desc">Divórcio, regulação parental, pensões de alimentos e regimes de bens.</p>
+          <p class="area__case"><em>Caso típico:</em> divórcio com filhos menores e casa em comum.</p>
+        </article>
+
+        <article class="area">
+          <span class="area__num">04</span>
+          <div class="area__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4zM8 7V4h8v3"/><path d="M9 12h6M9 16h4"/></svg>
+          </div>
+          <h3 class="area__name">Laboral</h3>
+          <p class="area__desc">Despedimentos, indemnizações, recibos verdes, assédio e contratos de trabalho.</p>
+          <p class="area__case"><em>Caso típico:</em> avaliação de proposta de cessação por acordo.</p>
+        </article>
+
+        <article class="area">
+          <span class="area__num">05</span>
+          <div class="area__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"/><path d="M9 12h6M9 16h4M9 8h3"/></svg>
+          </div>
+          <h3 class="area__name">Fiscal</h3>
+          <p class="area__desc">Notificações das Finanças, reclamações graciosas, IRS, IVA e planeamento fiscal.</p>
+          <p class="area__case"><em>Caso típico:</em> resposta a liquidação adicional de IRS.</p>
+        </article>
+
+        <article class="area">
+          <span class="area__num">06</span>
+          <div class="area__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg>
           </div>
-          <h3 class="area__name">Empresas</h3>
+          <h3 class="area__name">Empresarial</h3>
           <p class="area__desc">Constituição de sociedades, acordos de sócios, contratos comerciais e disputas societárias.</p>
+          <p class="area__case"><em>Caso típico:</em> redação de acordo parassocial para entrada de novo sócio.</p>
+        </article>
+
+        <article class="area">
+          <span class="area__num">07</span>
+          <div class="area__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4v6c0 4-3.5 7-9 8-5.5-1-9-4-9-8V7l9-4z"/></svg>
+          </div>
+          <h3 class="area__name">Penal</h3>
+          <p class="area__desc">Crimes patrimoniais, queixa-crime, assistência em interrogatório e contraordenações.</p>
+          <p class="area__case"><em>Caso típico:</em> notificação para depoimento como arguido.</p>
         </article>
 
       </div>
+
+      <!-- BLOCO de exclusões — transparência sobre o que não cobrimos -->
+      <p class="areas__disclaimer">
+        Não acompanhamos casos de direito penal grave nem regularização de cidadãos estrangeiros.
+      </p>
     </div>
   </section>
 
@@ -277,19 +400,42 @@ NAV — minimal, sticky on scroll
           e tornando a advocacia mais acessível e eficiente.&raquo;
         </blockquote>
 
+        <!-- BIO — 4 secções: o que faz hoje · credibilidade institucional · formação · abordagem -->
         <p class="about__bio">
-          Cresceu a observar o trabalho do pai na advocacia. Aos 16 anos começou a trabalhar
-          ao seu lado e, desde então, nunca mais parou. Licenciou-se em Direito pela Faculdade
-          de Direito da Universidade de Lisboa, com média final de 16 valores, e concluiu o
-          estágio da Ordem dos Advogados em outubro de 2024.
+          <strong>O que faz hoje.</strong> Recebe diretamente os Clientes em consulta de 1&nbsp;hora,
+          analisa o caso e devolve, por escrito, um plano de ação claro. Trabalha em sete áreas
+          de direito, com foco em resolver — não em prolongar.
         </p>
 
         <p class="about__bio">
-          É hoje sócio fundador da SFBA &mdash; Sousa Ferreira, Borges, Amaral, Sociedade de
-          Advogados, projeto que concretiza um sonho de longa data: exercer advocacia em
-          conjunto com o pai. A sua prática distingue-se pela proximidade ao Cliente, rigor
-          técnico e foco na prevenção de conflitos.
+          <strong>Credibilidade institucional.</strong> Cresceu na advocacia: aos 16 anos começou
+          a trabalhar com o pai, advogado há mais de 20 anos. É hoje sócio fundador da
+          SFBA &mdash; Sousa Ferreira, Borges, Amaral, Sociedade de Advogados, projeto que
+          concretiza um sonho de longa data: exercer advocacia em conjunto com o pai.
         </p>
+
+        <p class="about__bio">
+          <strong>Formação.</strong> Licenciado em Direito pela Faculdade de Direito da
+          Universidade de Lisboa (média final de 16 valores) e inscrito na Ordem dos Advogados
+          desde outubro de 2024.
+        </p>
+
+        <p class="about__bio">
+          <strong>Abordagem.</strong> Comunicação direta, sem jargão. Transparência total sobre
+          honorários: 100&nbsp;€ pagos por fatura após a consulta. Acompanhamento posterior
+          orçamentado por escrito, antes de qualquer trabalho.
+        </p>
+
+        <!-- VIDEO placeholder — vídeo de 30-45s a apresentar a consulta -->
+        <figure class="about__video" data-placeholder>
+          <div class="about__video-frame" aria-label="Vídeo de apresentação (30-45s) — a adicionar">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="about__video-label">Vídeo de apresentação · 30-45s · a adicionar</span>
+          </div>
+        </figure>
 
         <dl class="about__meta">
           <div class="about__meta-row">
@@ -347,10 +493,12 @@ NAV — minimal, sticky on scroll
 
       <div class="faq__list">
 
+        <!-- Ordem: preço, modalidade, cancelamento. Depois as restantes. -->
+
         <details class="faq__item">
-          <summary>Quanto custa a consulta?</summary>
+          <summary>Quanto custa a consulta e como é feito o pagamento?</summary>
           <div class="faq__answer">
-            <p>100&nbsp;€, pagos no momento da reserva. Sem extras. Outros honorários, caso contrate serviços adicionais, são acordados por escrito antes de qualquer trabalho.</p>
+            <p>A consulta custa <strong>100&nbsp;€</strong>. O pagamento é feito <strong>após a sessão</strong>, mediante fatura enviada por e-mail. Aceita-se transferência bancária e MB&nbsp;WAY. <em>(Métodos a confirmar com o João.)</em></p>
           </div>
         </details>
 
@@ -362,23 +510,37 @@ NAV — minimal, sticky on scroll
         </details>
 
         <details class="faq__item">
-          <summary>E se faltar à consulta?</summary>
-          <div class="faq__answer">
-            <p>Pode reagendar gratuitamente até 24h antes da hora marcada. Após esse prazo, a consulta considera-se realizada.</p>
-          </div>
-        </details>
-
-        <details class="faq__item">
           <summary>Política de cancelamento e reembolso?</summary>
           <div class="faq__answer">
-            <p>Cancelamentos com mais de 24h de antecedência são reembolsados integralmente. Cancelamentos com menos de 24h não são reembolsáveis.</p>
+            <p>Pode reagendar ou cancelar gratuitamente até <strong>24h antes</strong> da consulta. Cancelamentos com menos de 24h ou faltas sem aviso são faturados na íntegra (100&nbsp;€).</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Que documentos devo levar?</summary>
+          <summary>E se faltar à consulta?</summary>
           <div class="faq__answer">
-            <p>Tudo o que for relevante para o tema: contratos, notificações, e-mails, cartas. Recebe uma checklist personalizada no briefing por e-mail.</p>
+            <p>Pode reagendar gratuitamente até 24h antes. Faltas sem aviso prévio são faturadas (100&nbsp;€).</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>Vou falar diretamente com o João ou com outro advogado?</summary>
+          <div class="faq__answer">
+            <p>A consulta é sempre conduzida diretamente pelo João Sousa Ferreira. Sem intermediários, sem júnior, sem encaminhamento.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>A minha informação fica confidencial?</summary>
+          <div class="faq__answer">
+            <p>Sim. Toda a comunicação está abrangida pelo sigilo profissional do advogado (artigo 92.º do Estatuto da Ordem dos Advogados) e protegida pelo RGPD. Dados nunca partilhados com terceiros sem o seu consentimento expresso.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>E se o meu caso for demasiado complexo para 1 hora?</summary>
+          <div class="faq__answer">
+            <p>A consulta de 1 hora serve para <strong>diagnosticar</strong> e definir um plano de ação. Se o caso justificar acompanhamento posterior, recebe uma estimativa de custos por escrito, antes de qualquer trabalho adicional ser iniciado.</p>
           </div>
         </details>
 
@@ -390,16 +552,16 @@ NAV — minimal, sticky on scroll
         </details>
 
         <details class="faq__item">
-          <summary>Em que idiomas posso ter a consulta?</summary>
+          <summary>Que documentos devo levar?</summary>
           <div class="faq__answer">
-            <p>Português, inglês e espanhol.</p>
+            <p>Tudo o que for relevante para o tema: contratos, notificações, e-mails, cartas. Recebe uma checklist personalizada no briefing por e-mail.</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Como é feito o pagamento?</summary>
+          <summary>Em que idiomas posso ter a consulta?</summary>
           <div class="faq__answer">
-            <p>Cartão (Visa, Mastercard) ou MB&nbsp;WAY no checkout, com fatura emitida automaticamente para o e-mail indicado.</p>
+            <p>Português, inglês e espanhol.</p>
           </div>
         </details>
 
@@ -413,7 +575,7 @@ NAV — minimal, sticky on scroll
         <details class="faq__item">
           <summary>Inclui follow-up posterior?</summary>
           <div class="faq__answer">
-            <p>Recebe um sumário escrito da consulta com as ações sugeridas. Acompanhamento adicional é cobrado à parte.</p>
+            <p>Recebe um sumário escrito da consulta em 48h, com as ações sugeridas. Acompanhamento adicional é cobrado à parte.</p>
           </div>
         </details>
 
@@ -430,34 +592,47 @@ NAV — minimal, sticky on scroll
 
       <aside class="booking__aside">
         <p class="eyebrow eyebrow--inverse">Agendar consulta</p>
-        <h2 class="booking__title">Marque em três passos.<br>Confirmação imediata.</h2>
+        <h2 class="booking__title">Marque agora.<br>Pagamento por fatura,<br>após a consulta.</h2>
 
+        <!-- Lista de benefícios — 5 ícones com microcopy -->
         <ul class="booking__bullets" role="list">
           <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            1 hora com o João
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><strong>1 hora</strong> com o João, diretamente</div>
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Online ou presencial
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg>
+            <div><strong>Online</strong> (Meet) ou presencial em Lisboa</div>
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Sumário escrito incluído
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M9 12h6M9 16h4M9 8h3"/></svg>
+            <div><strong>Sumário escrito</strong> enviado em 48h</div>
           </li>
           <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Reagendamento até 24h antes
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1018 0M3 12V4M3 12h8"/></svg>
+            <div><strong>Reagendamento gratuito</strong> até 24h antes</div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M3 11h18M7 15h3"/></svg>
+            <div><strong>Pagamento por fatura</strong> após a consulta. Sem cartão no momento da marcação.</div>
           </li>
         </ul>
 
         <div class="booking__price">
           <span class="booking__price-num">100&nbsp;€</span>
-          <span class="booking__price-label">consulta única, IVA incluído</span>
+          <span class="booking__price-label">consulta única, IVA incluído &middot; pagos por fatura</span>
         </div>
       </aside>
 
       <form class="booking__form" data-form="booking" novalidate>
+
+        <!-- PRÓXIMOS HORÁRIOS — sensação de procura, reduz fricção -->
+        <div class="slots-preview" data-slots-preview aria-label="Próximos horários disponíveis">
+          <span class="slots-preview__label">Próximos horários:</span>
+          <ul class="slots-preview__list" data-slots-preview-list>
+            <!-- preenchido por JS -->
+          </ul>
+        </div>
 
         <fieldset class="booking__step">
           <legend class="booking__step-title"><span>1.</span> Escolha um dia</legend>
@@ -477,8 +652,12 @@ NAV — minimal, sticky on scroll
             <select id="bk-area" name="area" required>
               <option value="">Selecione uma área</option>
               <option>Imobiliário</option>
-              <option>Heranças</option>
-              <option>Empresas</option>
+              <option>Sucessões / Heranças</option>
+              <option>Família</option>
+              <option>Laboral</option>
+              <option>Fiscal</option>
+              <option>Empresarial</option>
+              <option>Penal</option>
               <option>Outra / não tenho a certeza</option>
             </select>
           </div>
@@ -525,7 +704,7 @@ NAV — minimal, sticky on scroll
           </label>
 
           <button type="submit" class="btn btn--primary btn--xl btn--full" data-submit>
-            Pagar 100&nbsp;€ e confirmar
+            Confirmar reserva
             <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -533,7 +712,7 @@ NAV — minimal, sticky on scroll
 
           <p class="booking__secure">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l5 2v4c0 3.5-2.5 5.6-5 6-2.5-.4-5-2.5-5-6V3l5-2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-            Pagamento seguro via <span data-placeholder>[Stripe / Easypay / a definir]</span>
+            Cancelamento gratuito até 24h antes. Pagamento por fatura, após a consulta.
           </p>
         </fieldset>
 
@@ -542,7 +721,7 @@ NAV — minimal, sticky on scroll
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><path d="M9 16l5 5 9-10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <h3>Reserva confirmada</h3>
-          <p>Receberá em instantes a confirmação e o briefing por e-mail.</p>
+          <p>Receberá em instantes o briefing por e-mail. A fatura é enviada após a consulta.</p>
         </div>
 
       </form>
@@ -605,6 +784,14 @@ FOOTER LEGAL
         Conteúdo informativo. Não substitui análise específica de cada caso por
         profissional habilitado.
       </p>
+      <!-- Marcas institucionais — discretas, cinzento -->
+      <div class="footer__marks" aria-label="Marcas institucionais">
+        <span class="footer__mark" title="Ordem dos Advogados">OA</span>
+        <span class="footer__mark-sep" aria-hidden="true"></span>
+        <span class="footer__mark" title="Faculdade de Direito da Universidade de Lisboa">FDUL</span>
+        <span class="footer__mark-sep" aria-hidden="true"></span>
+        <span class="footer__mark" title="SFBA — Sousa Ferreira, Borges, Amaral">SFBA</span>
+      </div>
       <p class="footer__copy">&copy; <span data-year></span> João Sousa Ferreira. Todos os direitos reservados.</p>
     </div>
   </div>
