@@ -530,11 +530,16 @@ legend { padding: 0; }
 
 .area {
   position: relative;
-  padding: 1.8rem 1.5rem 2rem;
+  padding: 2.2rem 1.75rem 2.4rem;
   border-right: var(--line);
   border-bottom: var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
   transition: background-color var(--t), color var(--t);
 }
+@media (min-width: 720px)  { .area { padding: 2.6rem 2rem 2.6rem; min-height: 360px; } }
+@media (min-width: 1080px) { .area { padding: 3rem 2.4rem 3rem; min-height: 400px; } }
 .area::before {
   content: "";
   position: absolute;
@@ -1374,23 +1379,18 @@ legend { padding: 0; }
 }
 .howto__callout span { font-size: var(--fs-sm); color: var(--c-500); }
 
-/* ÁREAS — grid responsivo para 7 áreas + caso típico */
-.areas__grid {
-  grid-template-columns: 1fr;
-}
-@media (min-width: 540px)  { .areas__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 900px)  { .areas__grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1200px) { .areas__grid { grid-template-columns: repeat(4, 1fr); } }
-
+/* ÁREAS — caso típico fica sempre no fundo do card (alinhamento entre colunas) */
 .area__case {
-  margin-top: .8rem;
-  padding-top: .8rem;
+  margin-top: auto;
+  padding-top: 1.2rem;
   border-top: 1px dashed var(--c-300);
   font-size: var(--fs-sm);
   color: var(--c-500);
   line-height: 1.45;
   transition: color .35s cubic-bezier(.2,.7,.2,1), border-color .35s cubic-bezier(.2,.7,.2,1);
 }
+/* Espaçamento extra entre a descrição e o caso típico */
+.area__desc { margin-bottom: 1.4rem; }
 .area__case em {
   font-style: normal;
   font-size: var(--fs-xs);
