@@ -361,6 +361,14 @@ legend { padding: 0; }
   object-position: 50% 28%;
   display: block;
 }
+.portrait__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+  display: block;
+  background: var(--c-900);
+}
 .portrait__caption {
   margin-top: .9rem;
   display: flex;
