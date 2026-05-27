@@ -351,21 +351,22 @@ legend { padding: 0; }
     0 1px 0 rgba(0,0,0,.04),
     0 24px 60px -32px rgba(22,22,24,.35);
 }
-.portrait--hero .portrait__frame { width: min(420px, 86vw); aspect-ratio: 3/4; }
-.portrait--about .portrait__frame { width: 100%; aspect-ratio: 4/5; }
+.portrait--hero .portrait__frame { width: min(420px, 86vw); aspect-ratio: 2/3; }
+/* Vídeo de apresentação do João — 9:16 (vertical, formato reels) */
+.portrait--about .portrait__frame { width: 100%; max-width: 320px; aspect-ratio: 9/16; }
 .portrait__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* foto landscape — centrar no rosto, ligeiramente acima */
-  object-position: 50% 28%;
+  /* foto portrait — rosto está aproximadamente a 25% do topo */
+  object-position: 50% 22%;
   display: block;
 }
 .portrait__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 28%;
+  object-position: 50% 50%;
   display: block;
   background: var(--c-900);
 }
@@ -393,6 +394,13 @@ legend { padding: 0; }
   gap: 1.6rem 2.2rem;
 }
 @media (min-width: 720px)  { .trust__grid { grid-template-columns: repeat(5, 1fr); } }
+/* Variante para 3 selos — distribuição equilibrada */
+.trust__grid--three {
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 540px)  { .trust__grid--three { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 720px)  { .trust__grid--three { grid-template-columns: repeat(3, 1fr); gap: 2rem 3rem; } }
+.trust__grid--three .trust__num { font-size: 2rem; }
 
 .trust__item { display: flex; flex-direction: column; gap: .25rem; }
 .trust__num {
@@ -1535,4 +1543,114 @@ legend { padding: 0; }
 .footer__mark-sep {
   width: 1px; height: 14px;
   background: rgba(255,255,255,.15);
+}
+
+/* ==========================================================
+   v4 COMPONENTS — REVISÃO LANDING PAGE
+   ========================================================== */
+
+/* ÁREAS — exemplos frequentes (substitui area__case) */
+.area__examples {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--c-300);
+  transition: border-color .35s cubic-bezier(.2,.7,.2,1);
+}
+.area__examples-label {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--c-900);
+  font-weight: 500;
+  margin-bottom: .6rem;
+  transition: color .35s cubic-bezier(.2,.7,.2,1);
+}
+.area__examples ul {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  list-style: none;
+}
+.area__examples li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--c-500);
+  line-height: 1.45;
+  transition: color .35s cubic-bezier(.2,.7,.2,1);
+}
+.area__examples li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--c-400);
+  transition: background-color .35s cubic-bezier(.2,.7,.2,1);
+}
+.area:hover .area__examples { border-color: rgba(255,255,255,.25); }
+.area:hover .area__examples-label { color: var(--c-white); }
+.area:hover .area__examples li { color: rgba(255,255,255,.85); }
+.area:hover .area__examples li::before { background: rgba(255,255,255,.6); }
+
+/* ABOUT bullets — substitui os parágrafos com <strong> inline */
+.about__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  list-style: none;
+  margin: .8rem 0;
+}
+.about__bullets li {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--c-300);
+  transition: border-color var(--t);
+}
+.about__bullets li:hover { border-left-color: var(--c-900); }
+.about__bullets strong {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--c-900);
+  letter-spacing: -.005em;
+}
+.about__bullets span {
+  font-size: var(--fs-base);
+  color: var(--c-500);
+  line-height: 1.55;
+}
+
+/* BOOKING — preço com IVA */
+.booking__price-vat {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.55);
+  margin-left: .35rem;
+  letter-spacing: -.01em;
+}
+
+/* FOOTER — 3 colunas, copy separado em baixo */
+.footer__inner--three {
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.2rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+@media (min-width: 720px) {
+  .footer__inner--three { grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
+}
+.footer__inner--three + .footer__copy {
+  display: block;
+  width: 100%;
+  max-width: var(--max);
+  margin: 1.6rem auto 0;
+  padding-inline: 0;
+  text-align: left;
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.4);
 }

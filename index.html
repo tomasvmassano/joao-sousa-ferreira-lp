@@ -32,12 +32,11 @@ NAV — minimal, sticky on scroll
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav__end">
-      <a href="tel:+351211382748" class="nav__phone" data-track="nav_phone_click" aria-label="Ligar para +351 211 382 748">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 3.5C3 3 3.4 2.5 4 2.5h2c.4 0 .8.3.9.7l.7 2.4c.1.4 0 .8-.3 1L6 7.8c.9 1.7 2.4 3.2 4.1 4.1l1.2-1.3c.3-.3.7-.4 1.1-.3l2.4.7c.4.1.7.5.7.9v2c0 .5-.4 1-1 1A12 12 0 013 3.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-        </svg>
-        <span>211&nbsp;382&nbsp;748</span>
-      </a>
+      <div class="lang" role="group" aria-label="Idioma">
+        <button type="button" class="lang__btn lang__btn--active" aria-pressed="true">PT</button>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <a href="/en" class="lang__btn" aria-pressed="false" data-track="nav_lang_en">EN</a>
+      </div>
       <a href="#agendar" class="btn btn--primary nav__cta" data-track="nav_cta_click">Agendar consulta</a>
     </div>
   </div>
@@ -53,17 +52,17 @@ NAV — minimal, sticky on scroll
 
       <div class="hero__content">
         <h1 class="hero__headline">
-          Saiba exatamente o que fazer no seu caso jurídico. <span class="hero__headline-accent">Em 1&nbsp;hora.</span>
+          Tem um problema jurídico e não sabe se vale a pena <span class="hero__headline-accent">avançar?</span>
         </h1>
 
         <p class="hero__sub">
-          Análise jurídica direta, sem intermediários.
-          100&nbsp;€, 1&nbsp;hora, online ou no escritório em Lisboa.
+          Agende uma consulta jurídica de análise estratégica e perceba, com clareza,
+          quais são os seus direitos, riscos e próximos passos.
         </p>
 
         <div class="hero__actions">
           <a href="#agendar" class="btn btn--primary btn--lg" data-track="hero_cta_click">
-            Agendar consulta
+            Agendar consulta jurídica
             <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
               <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -76,18 +75,10 @@ NAV — minimal, sticky on scroll
           </a>
         </div>
 
-        <!-- HERO PROOF — bloco discreto de credibilidade institucional -->
-        <div class="hero__proof" aria-label="Credibilidade">
-          <div class="hero__proof-item">
-            <span class="hero__proof-stars" aria-hidden="true">★★★★★</span>
-            <span class="hero__proof-label">Avaliação Google Business <span data-placeholder>[a confirmar]</span></span>
-          </div>
-          <span class="hero__proof-divider" aria-hidden="true"></span>
-          <div class="hero__proof-item">
-            <span class="hero__proof-mark">FDUL</span>
-            <span class="hero__proof-label">Sócio fundador da <a href="https://sfba.pt" target="_blank" rel="noopener">SFBA</a></span>
-          </div>
-        </div>
+        <!-- HERO PROOF — referência institucional simples -->
+        <p class="hero__microtrust">
+          Sócio da <a href="https://sfba.pt" target="_blank" rel="noopener">SFBA — Sociedade de Advogados</a>
+        </p>
       </div>
 
       <div class="hero__visual">
@@ -95,17 +86,17 @@ NAV — minimal, sticky on scroll
           <div class="portrait__frame">
             <img
               src="assets/img/joao.jpg"
-              srcset="assets/img/joao-md.jpg 800w, assets/img/joao.jpg 1600w"
+              srcset="assets/img/joao-md.jpg 533w, assets/img/joao.jpg 1066w"
               sizes="(max-width: 720px) 80vw, 360px"
               alt="João Sousa Ferreira, advogado"
               class="portrait__img"
-              width="1448" height="965"
+              width="1066" height="1600"
               loading="eager"
               fetchpriority="high">
           </div>
           <div class="portrait__caption">
             <span class="portrait__role">João Sousa Ferreira</span>
-            <span class="portrait__sub">Advogado &middot; Sócio fundador da SFBA</span>
+            <span class="portrait__sub">Advogado &middot; Sócio da SFBA &mdash; Sociedade de Advogados</span>
           </div>
         </div>
       </div>
@@ -118,26 +109,18 @@ NAV — minimal, sticky on scroll
   =========================================================== -->
   <section class="trust" aria-label="Credibilidade">
     <div class="container">
-      <div class="trust__grid">
-        <div class="trust__item">
-          <span class="trust__num">20+</span>
-          <span class="trust__label">Anos de prática jurídica na família</span>
-        </div>
+      <div class="trust__grid trust__grid--three">
         <div class="trust__item">
           <span class="trust__num">3</span>
           <span class="trust__label">Áreas de prática</span>
         </div>
         <div class="trust__item">
+          <span class="trust__num">30%</span>
+          <span class="trust__label">Clientes internacionais</span>
+        </div>
+        <div class="trust__item">
           <span class="trust__num">3</span>
           <span class="trust__label">Idiomas &middot; PT · EN · ES</span>
-        </div>
-        <div class="trust__item">
-          <span class="trust__num">SFBA</span>
-          <span class="trust__label">Sociedade de Advogados</span>
-        </div>
-        <div class="trust__item">
-          <span class="trust__num">FDUL</span>
-          <span class="trust__label">Faculdade de Direito de Lisboa</span>
         </div>
       </div>
     </div>
@@ -150,47 +133,57 @@ NAV — minimal, sticky on scroll
     <div class="container">
       <header class="section-head">
         <p class="eyebrow">Casos típicos</p>
-        <h2 class="section-title">Se algum destes cenários é o seu, sabemos por onde começar.</h2>
+        <h2 class="section-title">Os problemas jurídicos raramente começam no tribunal. Começam aqui.</h2>
       </header>
 
       <ol class="problems__list" role="list">
         <li class="problems__item">
           <span class="problems__num">01</span>
-          <span class="problems__tag" data-area="herancas">Heranças</span>
-          <p>Tem uma herança em aberto há meses e ninguém avança.</p>
+          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
+          <p>Vai comprar um imóvel e quer saber se há algum problema com a documentação.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">02</span>
           <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
-          <p>Vai comprar casa e o contrato veio com letras pequenas.</p>
+          <p>Está no estrangeiro e quer comprar um imóvel em Portugal.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">03</span>
-          <span class="problems__tag" data-area="herancas">Heranças</span>
-          <p>Recebeu uma proposta de partilha e quer saber se está justa.</p>
+          <span class="problems__tag" data-area="arrendamento">Arrendamento</span>
+          <p>Recebeu uma carta do senhorio ou do arrendatário e não sabe como nem o que deve responder.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">04</span>
-          <span class="problems__tag" data-area="empresas">Empresas</span>
-          <p>Vai abrir uma empresa ou rever um acordo com sócios.</p>
+          <span class="problems__tag" data-area="arrendamento">Arrendamento</span>
+          <p>Tem um imóvel para colocar no mercado de arrendamento, mas quer minimizar os riscos que corre ao arrendá-lo.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">05</span>
-          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
-          <p>É senhorio e o inquilino deixou de pagar há meses.</p>
+          <span class="problems__tag" data-area="herancas">Heranças</span>
+          <p>Faz parte de uma herança bloqueada há vários meses ou anos e parece que não há qualquer solução.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">06</span>
+          <span class="problems__tag" data-area="herancas">Heranças</span>
+          <p>Um herdeiro está a utilizar sozinho os bens da herança e não entrega o imóvel.</p>
+        </li>
+        <li class="problems__item">
+          <span class="problems__num">07</span>
           <span class="problems__tag" data-area="empresas">Empresas</span>
-          <p>Tem um sócio a sair ou a entrar e precisa de blindar o acordo.</p>
+          <p>Precisa de apoio jurídico regular e previsibilidade de custos.</p>
+        </li>
+        <li class="problems__item">
+          <span class="problems__num">08</span>
+          <span class="problems__tag" data-area="empresas">Empresas</span>
+          <p>Os seus clientes recusam-se ou evitam pagar valores em dívida por fornecimento de bens ou serviços.</p>
         </li>
       </ol>
 
-      <!-- CTA contextual: reconheceu o caso? -->
+      <!-- Nota de acompanhamento posterior -->
       <div class="problems__cta">
-        <p>Reconhece o seu caso?</p>
+        <p>Se o caso justificar acompanhamento posterior, receberá uma proposta clara de honorários e estratégia para os próximos passos.</p>
         <a href="#agendar" class="btn btn--primary" data-track="problems_cta_click">
-          Agendar consulta agora
+          Agendar consulta jurídica
           <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -207,35 +200,29 @@ NAV — minimal, sticky on scroll
       <div class="howto__content">
       <header class="section-head">
         <p class="eyebrow">Como funciona</p>
-        <h2 class="section-title">Quatro passos. Sem trocas de e-mail.</h2>
+        <h2 class="section-title">Simples. Direto ao ponto e sem trocas de e-mail.</h2>
       </header>
 
       <ol class="howto__steps" role="list">
         <li class="howto__step">
           <span class="howto__num">01</span>
-          <h3 class="howto__title">Escolha data e hora</h3>
-          <p class="howto__desc">Calendário com slots em tempo real. Selecione a área da consulta.</p>
+          <h3 class="howto__title">Escolha a data</h3>
+          <p class="howto__desc">Selecione o dia e hora disponíveis no calendário.</p>
         </li>
         <li class="howto__step">
           <span class="howto__num">02</span>
-          <h3 class="howto__title">Confirme a reserva</h3>
-          <p class="howto__desc">A consulta tem o custo fixo de 100&nbsp;€, pagos por fatura após a sessão. Slot fica garantido no momento.</p>
+          <h3 class="howto__title">Envie o seu caso</h3>
+          <p class="howto__desc">Receberá instruções para enviar a informação e documentos relevantes.</p>
         </li>
         <li class="howto__step">
           <span class="howto__num">03</span>
-          <h3 class="howto__title">Receba o briefing</h3>
-          <p class="howto__desc">Confirmação por e-mail com link da reunião e checklist do que levar.</p>
+          <h3 class="howto__title">A consulta</h3>
+          <p class="howto__desc">Reunião online ou presencial, com análise direta do caso e esclarecimento das suas dúvidas.</p>
         </li>
         <li class="howto__step">
           <span class="howto__num">04</span>
-          <h3 class="howto__title">O dia da consulta</h3>
-          <p class="howto__desc">1&nbsp;hora com análise direta, online ou no escritório em Lisboa. Sai com:</p>
-          <ul class="howto__deliver">
-            <li>Análise jurídica do caso</li>
-            <li>Plano de ação por escrito</li>
-            <li>Estimativa de custos para passos seguintes</li>
-            <li>Sumário enviado em 48h</li>
-          </ul>
+          <h3 class="howto__title">Próximos passos</h3>
+          <p class="howto__desc">Sai da consulta com análise jurídica do caso, identificação dos principais riscos e orientação sobre os próximos passos.</p>
         </li>
       </ol>
       </div>
@@ -260,8 +247,16 @@ NAV — minimal, sticky on scroll
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z"/></svg>
           </div>
           <h3 class="area__name">Imobiliário</h3>
-          <p class="area__desc">Compra e venda, arrendamento, condomínios, usufruto e disputas com inquilinos ou senhorios.</p>
-          <p class="area__case"><em>Caso típico:</em> revisão de contrato-promessa antes de assinar.</p>
+          <p class="area__desc">Compra e venda de imóveis, contratos-promessa, arrendamento, condomínio e conflitos relacionados com património imobiliário.</p>
+          <div class="area__examples">
+            <span class="area__examples-label">Exemplos frequentes</span>
+            <ul>
+              <li>Análise de CPCV antes da assinatura</li>
+              <li>Problemas com infiltrações ou obras</li>
+              <li>Conflitos entre senhorios e inquilinos</li>
+              <li>Incumprimento na compra ou venda de imóveis</li>
+            </ul>
+          </div>
         </article>
 
         <article class="area">
@@ -270,8 +265,16 @@ NAV — minimal, sticky on scroll
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 1-4.5 4.4L18 21l-6-3.2L6 21l1.5-6.6L3 10l6-1z"/></svg>
           </div>
           <h3 class="area__name">Heranças</h3>
-          <p class="area__desc">Testamentos, partilhas, legados e processos sucessórios em aberto.</p>
-          <p class="area__case"><em>Caso típico:</em> partilha bloqueada entre herdeiros há meses.</p>
+          <p class="area__desc">Partilhas, inventários, testamentos, conflitos entre herdeiros e organização patrimonial.</p>
+          <div class="area__examples">
+            <span class="area__examples-label">Exemplos frequentes</span>
+            <ul>
+              <li>Herança bloqueada há vários meses ou anos</li>
+              <li>Desacordo entre herdeiros</li>
+              <li>Herdeiros a ocupar imóveis da herança</li>
+              <li>Dúvidas sobre direitos sucessórios</li>
+            </ul>
+          </div>
         </article>
 
         <article class="area">
@@ -280,15 +283,23 @@ NAV — minimal, sticky on scroll
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg>
           </div>
           <h3 class="area__name">Empresas</h3>
-          <p class="area__desc">Constituição de sociedades, acordos de sócios, contratos comerciais e disputas societárias.</p>
-          <p class="area__case"><em>Caso típico:</em> redação de acordo parassocial para entrada de novo sócio.</p>
+          <p class="area__desc">Contratos comerciais, acordos entre sócios, cobrança de dívidas e apoio jurídico empresarial.</p>
+          <div class="area__examples">
+            <span class="area__examples-label">Exemplos frequentes</span>
+            <ul>
+              <li>Entrada ou saída de sócios</li>
+              <li>Contratos mal definidos</li>
+              <li>Incumprimentos comerciais</li>
+              <li>Conflitos societários</li>
+            </ul>
+          </div>
         </article>
 
       </div>
 
-      <!-- Nota: outras matérias analisadas caso a caso -->
+      <!-- Nota: outras situações mediante enquadramento prévio -->
       <p class="areas__disclaimer">
-        Outras matérias jurídicas analisadas caso a caso, mediante contacto prévio.
+        Outras situações poderão ser analisadas mediante enquadramento prévio do caso.
       </p>
     </div>
   </section>
@@ -329,56 +340,51 @@ NAV — minimal, sticky on scroll
       <div class="about__content">
         <p class="eyebrow">Sobre o João</p>
         <h2 class="section-title section-title--tight">
-          Uma abordagem moderna e próxima.
+          Uma abordagem moderna e transparente.
         </h2>
 
         <blockquote class="about__quote">
-          &laquo;Alio rigor técnico a soluções práticas, simplificando processos
+          &laquo;Alio rigor técnico a soluções práticas, simplificando os processos
           e tornando a advocacia mais acessível e eficiente.&raquo;
         </blockquote>
 
-        <!-- BIO — 4 secções: o que faz hoje · credibilidade institucional · formação · abordagem -->
-        <p class="about__bio">
-          <strong>O que faz hoje.</strong> Recebe diretamente os Clientes em consulta de 1&nbsp;hora,
-          analisa o caso e devolve, por escrito, um plano de ação claro. Trabalha em sete áreas
-          de direito, com foco em resolver — não em prolongar.
-        </p>
-
-        <p class="about__bio">
-          <strong>Credibilidade institucional.</strong> Cresceu na advocacia: aos 16 anos começou
-          a trabalhar com o pai, advogado há mais de 20 anos. É hoje sócio fundador da
-          SFBA &mdash; Sousa Ferreira, Borges, Amaral, Sociedade de Advogados, projeto que
-          concretiza um sonho de longa data: exercer advocacia em conjunto com o pai.
-        </p>
-
-        <p class="about__bio">
-          <strong>Formação.</strong> Licenciado em Direito pela Faculdade de Direito da
-          Universidade de Lisboa, com média final de 16 valores.
-        </p>
-
-        <p class="about__bio">
-          <strong>Abordagem.</strong> Comunicação direta, sem jargão. Transparência total sobre
-          honorários: 100&nbsp;€ pagos por fatura após a consulta. Acompanhamento posterior
-          orçamentado por escrito, antes de qualquer trabalho.
-        </p>
+        <!-- BIO — 4 bullets curtos -->
+        <ul class="about__bullets">
+          <li>
+            <strong>Como trabalha</strong>
+            <span>Consultas de 1 hora, com análise direta dos casos e orientação clara sobre os próximos passos.</span>
+          </li>
+          <li>
+            <strong>Experiência com base real</strong>
+            <span>Cresceu dentro da advocacia. Desde cedo acompanhou o pai em casos reais e aprendeu que o que faz a diferença é o rigor, honestidade e soluções práticas, optando, sempre que possível, pela versão menos litigiosa de resolução das questões que lhe são confiadas.</span>
+          </li>
+          <li>
+            <strong>Comunicação direta</strong>
+            <span>Fala de forma simples, sem rodeios e sem &laquo;juridiquês&raquo;. Explica o que importa de modo a que o cliente perceba cada pormenor da sua questão jurídica.</span>
+          </li>
+          <li>
+            <strong>Acompanhamento</strong>
+            <span>Se o caso exigir continuidade, terá sempre uma proposta clara e transparente sobre os próximos passos.</span>
+          </li>
+        </ul>
 
         <dl class="about__meta">
           <div class="about__meta-row">
             <dt>Idiomas</dt>
-            <dd>Português &middot; Inglês &middot; Espanhol</dd>
+            <dd>PT &ndash; ENG &ndash; ESP</dd>
           </div>
           <div class="about__meta-row">
             <dt>Formação</dt>
-            <dd>Faculdade de Direito da Universidade de Lisboa</dd>
+            <dd>Licenciado em Direito pela Faculdade de Direito da Universidade de Lisboa</dd>
           </div>
           <div class="about__meta-row">
             <dt>Sociedade</dt>
-            <dd>Sócio fundador da SFBA &mdash; Sousa Ferreira, Borges, Amaral &middot; SP RL</dd>
+            <dd>Sócio da SFBA &mdash; Sociedade de Advogados</dd>
           </div>
         </dl>
 
         <a href="#agendar" class="btn btn--primary" data-track="about_cta_click">
-          Agendar consulta
+          Agendar consulta jurídica
           <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -394,8 +400,8 @@ NAV — minimal, sticky on scroll
   <section class="midcta" aria-label="Agendar consulta">
     <div class="midcta__inner">
       <div class="midcta__content">
-        <h2 class="midcta__title">A resposta clara para o seu caso começa numa única consulta.</h2>
-        <p class="midcta__sub">100&nbsp;€, 1&nbsp;hora, sem trocas de e-mail intermináveis.</p>
+        <h2 class="midcta__title">Clareza jurídica. Sem complicações.</h2>
+        <p class="midcta__sub">Uma consulta focada em perceber o seu caso e indicar os próximos passos.</p>
         <a href="#agendar" class="btn btn--primary btn--lg" data-track="mid_cta_click">
           Agendar consulta
           <svg class="btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -418,89 +424,108 @@ NAV — minimal, sticky on scroll
 
       <div class="faq__list">
 
-        <!-- Ordem: preço, modalidade, cancelamento. Depois as restantes. -->
-
         <details class="faq__item">
-          <summary>Quanto custa a consulta e como é feito o pagamento?</summary>
+          <summary>Qual o valor da consulta e como é feito o pagamento?</summary>
           <div class="faq__answer">
-            <p>A consulta custa <strong>100&nbsp;€</strong>. O pagamento é feito <strong>após a sessão</strong>, mediante fatura enviada por e-mail. Aceita-se transferência bancária e MB&nbsp;WAY. <em>(Métodos a confirmar com o João.)</em></p>
+            <p>A consulta tem o valor de <strong>€100,00 + IVA</strong> e o pagamento é feito após a mesma contra a emissão da respetiva fatura.</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>É online ou presencial?</summary>
+          <summary>A consulta é online ou presencial?</summary>
           <div class="faq__answer">
-            <p>Por defeito a consulta é online (Google&nbsp;Meet). Em Lisboa, pode optar por presencial no escritório SFBA, mediante seleção no momento da reserva.</p>
+            <p>A consulta tanto pode ser online (via Google&nbsp;Meet) ou presencialmente, no escritório da SFBA que fica situado em Oeiras, no distrito de Lisboa.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>Política de cancelamento e reembolso?</summary>
           <div class="faq__answer">
-            <p>Pode reagendar ou cancelar gratuitamente até <strong>24h antes</strong> da consulta. Cancelamentos com menos de 24h ou faltas sem aviso são faturados na íntegra (100&nbsp;€).</p>
+            <p>O reagendamento ou cancelamento da consulta pode ser feito gratuitamente até <strong>24h antes</strong> da consulta. Cancelamentos após este período são faturados na íntegra.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>E se faltar à consulta?</summary>
           <div class="faq__answer">
-            <p>Pode reagendar gratuitamente até 24h antes. Faltas sem aviso prévio são faturadas (100&nbsp;€).</p>
+            <p>O reagendamento ou cancelamento gratuito pode ser realizado até 24h antes da consulta. Caso falte à consulta, a respetiva fatura será emitida e ser-lhe-á enviada para pagamento.</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Vou falar diretamente com o João ou com outro advogado?</summary>
+          <summary>A consulta é confidencial?</summary>
           <div class="faq__answer">
-            <p>A consulta é sempre conduzida diretamente pelo João Sousa Ferreira. Sem intermediários, sem júnior, sem encaminhamento.</p>
-          </div>
-        </details>
-
-        <details class="faq__item">
-          <summary>A minha informação fica confidencial?</summary>
-          <div class="faq__answer">
-            <p>Sim. Toda a comunicação está abrangida pelo sigilo profissional do advogado (artigo 92.º do Estatuto da Ordem dos Advogados) e protegida pelo RGPD. Dados nunca partilhados com terceiros sem o seu consentimento expresso.</p>
+            <p>Sim. Todas as informações partilhadas no âmbito da consulta estão protegidas pelo dever de sigilo profissional do advogado. Os documentos e detalhes do seu caso serão tratados com total confidencialidade.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>E se o meu caso for demasiado complexo para 1 hora?</summary>
           <div class="faq__answer">
-            <p>A consulta de 1 hora serve para <strong>diagnosticar</strong> e definir um plano de ação. Se o caso justificar acompanhamento posterior, recebe uma estimativa de custos por escrito, antes de qualquer trabalho adicional ser iniciado.</p>
+            <p>A consulta serve para analisar o caso, identificar os principais riscos e definir os próximos passos. Se a situação exigir acompanhamento posterior ou trabalho adicional, será apresentada uma proposta clara e autónoma para esse efeito.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>Quanto tempo dura a consulta?</summary>
           <div class="faq__answer">
-            <p>1 hora. Tempo suficiente para apresentar o caso e receber orientação concreta sobre os próximos passos.</p>
+            <p>A consulta jurídica tem a duração de 1 hora.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>Que documentos devo levar?</summary>
           <div class="faq__answer">
-            <p>Tudo o que for relevante para o tema: contratos, notificações, e-mails, cartas. Recebe uma checklist personalizada no briefing por e-mail.</p>
+            <p>Tudo o que for relevante para a questão que irá apresentar: contratos, notificações, e-mails, cartas, fotografias.</p>
           </div>
         </details>
 
         <details class="faq__item">
           <summary>Em que idiomas posso ter a consulta?</summary>
           <div class="faq__answer">
-            <p>Português, inglês e espanhol.</p>
+            <p>Português, Inglês ou Espanhol.</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Faz processo judicial depois da consulta?</summary>
+          <summary>Vou falar diretamente com o Dr. João Sousa Ferreira ou com outro advogado?</summary>
           <div class="faq__answer">
-            <p>Se o caso justificar avançar, pode contratar acompanhamento posterior, com honorários acordados por escrito antes de qualquer trabalho. Não está incluído nos 100&nbsp;€ da consulta.</p>
+            <p>As consultas são sempre conduzidas pelo Dr. João Sousa Ferreira.</p>
           </div>
         </details>
 
         <details class="faq__item">
-          <summary>Inclui follow-up posterior?</summary>
+          <summary>A consulta garante que o meu caso vai ser aceite?</summary>
           <div class="faq__answer">
-            <p>Recebe um sumário escrito da consulta em 48h, com as ações sugeridas. Acompanhamento adicional é cobrado à parte.</p>
+            <p>Não. Serve para avaliar juridicamente o caso e indicar os próximos passos.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>A consulta substitui uma proposta de honorários?</summary>
+          <div class="faq__answer">
+            <p>Não necessariamente. Se for necessário acompanhamento posterior, será apresentada proposta de honorários autónoma.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>Posso enviar documentos antes?</summary>
+          <div class="faq__answer">
+            <p>Sim, para melhor preparação da consulta.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>E se o caso for urgente?</summary>
+          <div class="faq__answer">
+            <p>Será avaliada a urgência e indicado o caminho processual mais adequado.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary>A consulta inclui acompanhamento judicial?</summary>
+          <div class="faq__answer">
+            <p>A consulta destina-se à análise do caso e definição dos próximos passos. Se for necessário avançar com processo judicial ou acompanhamento posterior, será apresentada uma proposta autónoma e adequada ao caso concreto.</p>
           </div>
         </details>
 
@@ -517,35 +542,31 @@ NAV — minimal, sticky on scroll
 
       <aside class="booking__aside">
         <p class="eyebrow eyebrow--inverse">Agendar consulta</p>
-        <h2 class="booking__title">Marque agora.<br>Pagamento por fatura,<br>após a consulta.</h2>
+        <h2 class="booking__title">Uma consulta focada no que realmente importa: o seu caso.</h2>
 
-        <!-- Lista de benefícios — 5 ícones com microcopy -->
+        <!-- Lista de benefícios — 4 ícones com microcopy -->
         <ul class="booking__bullets" role="list">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            <div><strong>1 hora</strong> com o João, diretamente</div>
+            <div>Consulta jurídica de <strong>1 hora</strong>, diretamente com o Dr. João Sousa Ferreira</div>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg>
-            <div><strong>Online</strong> (Meet) ou presencial em Lisboa</div>
+            <div><strong>Online ou presencial</strong>, em Lisboa</div>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M9 12h6M9 16h4M9 8h3"/></svg>
-            <div><strong>Sumário escrito</strong> enviado em 48h</div>
+            <div><strong>Análise prática do caso</strong> e esclarecimento das principais dúvidas</div>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1018 0M3 12V4M3 12h8"/></svg>
-            <div><strong>Reagendamento gratuito</strong> até 24h antes</div>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M3 11h18M7 15h3"/></svg>
-            <div><strong>Pagamento por fatura</strong> após a consulta. Sem cartão no momento da marcação.</div>
+            <div><strong>Possibilidade de acompanhamento posterior</strong></div>
           </li>
         </ul>
 
         <div class="booking__price">
-          <span class="booking__price-num">100&nbsp;€</span>
-          <span class="booking__price-label">consulta única, IVA incluído &middot; pagos por fatura</span>
+          <span class="booking__price-num">&euro;100,00 <span class="booking__price-vat">+ IVA</span></span>
+          <span class="booking__price-label">Possibilidade de reagendamento gratuito até 24h antes da consulta.</span>
         </div>
       </aside>
 
@@ -577,6 +598,7 @@ NAV — minimal, sticky on scroll
             <select id="bk-area" name="area" required>
               <option value="">Selecione uma área</option>
               <option>Imobiliário</option>
+              <option>Arrendamento</option>
               <option>Heranças</option>
               <option>Empresas</option>
               <option>Outra / não tenho a certeza</option>
@@ -655,7 +677,7 @@ NAV — minimal, sticky on scroll
   =========================================================== -->
   <section class="contact" aria-label="Contactos alternativos">
     <div class="container contact__inner">
-      <p class="contact__lead">Para situações fora do standard, contactar:</p>
+      <p class="contact__lead">Para situações que exijam enquadramento prévio ou acompanhamento específico, contacte diretamente o escritório:</p>
       <div class="contact__channels">
         <a href="mailto:jferreira@sfba.pt" class="contact__channel">
           <span>E-mail</span>
@@ -676,11 +698,11 @@ NAV — minimal, sticky on scroll
 FOOTER LEGAL
 =========================================================== -->
 <footer class="footer">
-  <div class="footer__inner">
+  <div class="footer__inner footer__inner--three">
     <div class="footer__col footer__col--brand">
       <span class="footer__brand">João Sousa Ferreira</span>
       <p class="footer__small">
-        Sócio fundador da SFBA &mdash; Sousa Ferreira, Borges, Amaral<br>
+        Sócio da SFBA &mdash; Sousa Ferreira, Borges, Amaral<br>
         Sociedade de Advogados, SP RL<br>
         Alameda Bonifácio Lázaro Lozano, n.º&nbsp;15, 2.º&nbsp;G &middot; 2780-125 Oeiras
       </p>
@@ -696,31 +718,16 @@ FOOTER LEGAL
     <div class="footer__col">
       <span class="footer__heading">Contactos</span>
       <a href="mailto:jferreira@sfba.pt">jferreira@sfba.pt</a>
-      <a href="tel:+351211382748">+351 211 382 748</a>
+      <a href="tel:+351211382748">+351&nbsp;211&nbsp;382&nbsp;748</a>
       <a href="https://sfba.pt" target="_blank" rel="noopener">sfba.pt</a>
     </div>
-
-    <div class="footer__col footer__col--meta">
-      <p class="footer__disclaimer">
-        Conteúdo informativo. Não substitui análise específica de cada caso por
-        profissional habilitado.
-      </p>
-      <!-- Marcas institucionais — discretas, cinzento -->
-      <div class="footer__marks" aria-label="Marcas institucionais">
-        <span class="footer__mark" title="Ordem dos Advogados">OA</span>
-        <span class="footer__mark-sep" aria-hidden="true"></span>
-        <span class="footer__mark" title="Faculdade de Direito da Universidade de Lisboa">FDUL</span>
-        <span class="footer__mark-sep" aria-hidden="true"></span>
-        <span class="footer__mark" title="SFBA — Sousa Ferreira, Borges, Amaral">SFBA</span>
-      </div>
-      <p class="footer__copy">&copy; <span data-year></span> João Sousa Ferreira. Todos os direitos reservados.</p>
-    </div>
   </div>
+  <p class="footer__copy">&copy; <span data-year></span> João Sousa Ferreira. Todos os direitos reservados.</p>
 </footer>
 
 <!-- Sticky CTA — visível ao scroll -->
 <a href="#agendar" class="sticky-cta" data-sticky-cta data-track="sticky_cta_click" aria-label="Agendar consulta">
-  <span>Agendar &middot; 100&nbsp;€</span>
+  <span>Agendar consulta</span>
   <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
     <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
