@@ -110,8 +110,35 @@
   const successEl = document.querySelector('[data-success]');
 
   if (calRoot && slotsRoot && form) {
-    const MONTHS_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-    const DOW_PT = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    // i18n — detecta língua via <html lang="…"> (default pt)
+    const LANG = (document.documentElement.lang || 'pt').toLowerCase().slice(0,2);
+    const I18N = {
+      pt: {
+        MONTHS: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        DOW: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        PREV: 'Mês anterior', NEXT: 'Próximo mês',
+        CAL_LABEL: 'Calendário', NO_SLOTS: 'Sem horários disponíveis neste dia.',
+        ALERT_PICK: 'Escolha uma data e um horário antes de continuar.',
+        SUBMIT_LOADING: 'A confirmar...',
+        TODAY_LABEL: 'hoje', TOMORROW_LABEL: 'amanhã',
+        VIEW_MORE: 'Ver mais &rarr;',
+        LOCALE: 'pt-PT',
+      },
+      en: {
+        MONTHS: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        DOW: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        PREV: 'Previous month', NEXT: 'Next month',
+        CAL_LABEL: 'Calendar', NO_SLOTS: 'No slots available on this day.',
+        ALERT_PICK: 'Please pick a date and time before continuing.',
+        SUBMIT_LOADING: 'Confirming...',
+        TODAY_LABEL: 'today', TOMORROW_LABEL: 'tomorrow',
+        VIEW_MORE: 'See more &rarr;',
+        LOCALE: 'en-GB',
+      },
+    };
+    const T = I18N[LANG] || I18N.pt;
+    const MONTHS_PT = T.MONTHS;
+    const DOW_PT = T.DOW;
 
     const today = new Date();
     today.setHours(0,0,0,0);
@@ -161,14 +188,14 @@
         (viewYear === lastBookable.getFullYear() && viewMonth >= lastBookable.getMonth());
 
       calRoot.innerHTML = `
-        <button type="button" class="cal__nav" data-prev ${isPrevDisabled ? 'disabled' : ''} aria-label="Mês anterior">
+        <button type="button" class="cal__nav" data-prev ${isPrevDisabled ? 'disabled' : ''} aria-label="${T.PREV}">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="cal__title">${MONTHS_PT[viewMonth]} ${viewYear}</div>
-        <button type="button" class="cal__nav" data-next ${isNextDisabled ? 'disabled' : ''} aria-label="Próximo mês">
+        <button type="button" class="cal__nav" data-next ${isNextDisabled ? 'disabled' : ''} aria-label="${T.NEXT}">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="cal__grid" role="grid" aria-label="Calendário">
+        <div class="cal__grid" role="grid" aria-label="${T.CAL_LABEL}">
           ${DOW_PT.map(d => `<div class="cal__dow">${d}</div>`).join('')}
           ${cells.map(cell => {
             if (cell.out) return `<span class="cal__day cal__day--out">${cell.day}</span>`;
@@ -216,7 +243,7 @@
       if (!selectedDate) { slotsRoot.innerHTML = ''; return; }
       const slots = slotsForDate(selectedDate);
       if (slots.length === 0) {
-        slotsRoot.innerHTML = `<p class="field__help" style="grid-column:1/-1">Sem horários disponíveis neste dia.</p>`;
+        slotsRoot.innerHTML = `<p class="field__help" style="grid-column:1/-1">${T.NO_SLOTS}</p>`;
         return;
       }
       slotsRoot.innerHTML = slots.map(s => `
@@ -247,7 +274,7 @@
       for (let i = 0; i < 14 && upcoming.length < 3; i++) {
         const slots = slotsForDate(cursor);
         if (slots.length > 0) {
-          const label = i === 0 ? 'hoje' : i === 1 ? 'amanhã' : cursor.toLocaleDateString('pt-PT', { weekday: 'short', day: 'numeric' });
+          const label = i === 0 ? T.TODAY_LABEL : i === 1 ? T.TOMORROW_LABEL : cursor.toLocaleDateString(T.LOCALE, { weekday: 'short', day: 'numeric' });
           upcoming.push({ date: new Date(cursor), label, time: slots[0] });
           if (slots.length > 1 && upcoming.length < 3) {
             upcoming.push({ date: new Date(cursor), label, time: slots[1] });
@@ -264,7 +291,7 @@
         </li>
       `).join('') + `
         <li>
-          <a href="#agendar-cal" class="slots-preview__more" data-track="slots_preview_more">Ver mais &rarr;</a>
+          <a href="#agendar-cal" class="slots-preview__more" data-track="slots_preview_more">${T.VIEW_MORE}</a>
         </li>
       `;
       preview.querySelectorAll('[data-preview-date]').forEach(btn => {
@@ -289,7 +316,7 @@
       e.preventDefault();
       if (!selectedDate || !selectedSlot) {
         slotsStep.hidden = false;
-        alert('Escolha uma data e um horário antes de continuar.');
+        alert(T.ALERT_PICK);
         return;
       }
       if (!form.reportValidity()) return;
@@ -307,7 +334,7 @@
       // =======================================================
       const submitBtn = form.querySelector('[data-submit]');
       submitBtn.disabled = true;
-      submitBtn.textContent = 'A confirmar...';
+      submitBtn.textContent = T.SUBMIT_LOADING;
 
       setTimeout(() => {
         // simulação de sucesso
