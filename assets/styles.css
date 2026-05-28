@@ -257,21 +257,29 @@ legend { padding: 0; }
 .nav__cta { }
 @media (max-width: 540px) { .nav__cta { display: none; } }
 
-/* Telefone na nav — visível em desktop, oculto em mobile (sticky CTA cobre) */
-.nav__phone {
-  display: none;
+/* Language switch — botão único que aponta para a outra língua */
+.lang-switch {
+  display: inline-flex;
   align-items: center;
-  gap: .45rem;
-  font-size: var(--fs-sm);
-  font-weight: 500;
+  justify-content: center;
+  height: 34px;
+  min-width: 44px;
+  padding: 0 .65rem;
+  border: 1px solid var(--c-300);
+  border-radius: var(--r);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .14em;
   color: var(--c-900);
-  font-variant-numeric: tabular-nums;
-  transition: color var(--t);
+  text-transform: uppercase;
+  background: transparent;
+  transition: border-color var(--t), background-color var(--t), color var(--t);
 }
-.nav__phone svg { color: var(--c-500); transition: color var(--t); }
-.nav__phone:hover { color: var(--c-accent); }
-.nav__phone:hover svg { color: var(--c-accent); }
-@media (min-width: 720px) { .nav__phone { display: inline-flex; } }
+.lang-switch:hover {
+  border-color: var(--c-900);
+  background: var(--c-900);
+  color: var(--c-white);
+}
 
 /* ==========================================================
    HERO
