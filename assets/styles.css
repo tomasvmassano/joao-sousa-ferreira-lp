@@ -231,6 +231,14 @@ legend { padding: 0; }
   font-size: .82rem;
   letter-spacing: .12em;
 }
+/* Variante quando o brand mark é uma assinatura SVG (sem caixa, sem padding) */
+.nav__brand-mark--logo {
+  height: 34px;
+  width: auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
 .nav__brand-divider {
   width: 1px; height: 18px; background: var(--c-300);
 }
@@ -458,12 +466,16 @@ legend { padding: 0; }
 }
 .problems__item:hover .problems__num { color: var(--c-900); }
 .problems__item p {
-  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: -.015em;
+  letter-spacing: -.005em;
   color: var(--c-900);
-  line-height: 1.3;
+  line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
+@media (min-width: 720px) { .problems__item p { font-size: 1.0625rem; line-height: 1.55; } }
 
 /* ==========================================================
    HOW IT WORKS — 4 steps
@@ -1270,13 +1282,20 @@ legend { padding: 0; }
   color: var(--c-500);
 }
 
-/* PROBLEMS — tag de área inline + CTA contextual no fim */
+/* PROBLEMS — colunas fixas: num · tag (largura fixa) · texto.
+   Tag column tem largura fixa para que o texto comece sempre na mesma X. */
 .problems__item {
-  grid-template-columns: 60px auto 1fr;
-  gap: 1.2rem;
+  grid-template-columns: 50px 110px 1fr;
+  gap: 1rem;
+  align-items: center;
 }
-@media (min-width: 720px) { .problems__item { grid-template-columns: 90px auto 1fr; gap: 1.5rem; } }
+@media (min-width: 720px) {
+  .problems__item { grid-template-columns: 80px 140px 1fr; gap: 1.4rem; }
+}
 .problems__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: var(--fs-xs);
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1285,8 +1304,8 @@ legend { padding: 0; }
   border: 1px solid var(--c-200);
   border-radius: var(--r-pill);
   white-space: nowrap;
-  align-self: center;
   font-weight: 500;
+  justify-self: start;
   transition: color .5s cubic-bezier(.16,.84,.24,1), border-color .5s cubic-bezier(.16,.84,.24,1);
 }
 .problems__item:hover .problems__tag { color: var(--c-900); border-color: var(--c-400); }

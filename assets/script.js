@@ -160,7 +160,14 @@
       return base.filter((_, i) => (seed + i) % 4 !== 0);
     };
 
-    const fmt = (d) => d.toISOString().slice(0, 10);
+    // Bug fix: toISOString() converte para UTC. Em PT (UTC+0/+1) isto causa off-by-one
+    // (uma data local meia-noite vira 23:00 UTC do dia anterior). Usar partes locais.
+    const fmt = (d) => {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    };
 
     const renderCal = () => {
       const first = new Date(viewYear, viewMonth, 1);
