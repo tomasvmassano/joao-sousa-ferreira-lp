@@ -1681,3 +1681,21 @@ legend { padding: 0; }
   font-size: var(--fs-xs);
   color: rgba(255,255,255,.4);
 }
+
+/* ==========================================================
+   v7 — CALENDLY embed container
+   Substitui o calendário/form custom. White card sobre o booking__grid
+   accent para isolar visualmente o widget.
+   ========================================================== */
+.booking__calendly {
+  background: var(--c-white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -40px rgba(0,0,0,.5);
+  /* min-height evita layout jump enquanto o iframe carrega */
+  min-height: 720px;
+}
+.booking__calendly .calendly-inline-widget {
+  min-width: 100% !important;
+  width: 100% !important;
+}
