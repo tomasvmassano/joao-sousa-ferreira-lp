@@ -233,7 +233,7 @@ legend { padding: 0; }
 }
 /* Variante quando o brand mark é uma assinatura SVG (sem caixa, sem padding) */
 .nav__brand-mark--logo {
-  height: 34px;
+  height: 44px;
   width: auto;
   min-width: 0;
   padding: 0;

@@ -95,10 +95,6 @@ NAV — minimal, sticky on scroll
           </a>
         </div>
 
-        <!-- HERO PROOF — referência institucional simples -->
-        <p class="hero__microtrust">
-          Sócio da <a href="https://sfba.pt" target="_blank" rel="noopener">SFBA — Sociedade de Advogados</a>
-        </p>
       </div>
 
       <div class="hero__visual">
@@ -244,12 +240,12 @@ NAV — minimal, sticky on scroll
         </li>
         <li class="problems__item">
           <span class="problems__num">03</span>
-          <span class="problems__tag" data-area="arrendamento">Arrendamento</span>
+          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
           <p>Recebeu uma carta do senhorio ou do arrendatário e não sabe como nem o que deve responder.</p>
         </li>
         <li class="problems__item">
           <span class="problems__num">04</span>
-          <span class="problems__tag" data-area="arrendamento">Arrendamento</span>
+          <span class="problems__tag" data-area="imobiliario">Imobiliário</span>
           <p>Tem um imóvel para colocar no mercado de arrendamento, mas quer minimizar os riscos que corre ao arrendá-lo.</p>
         </li>
         <li class="problems__item">
@@ -429,6 +425,55 @@ NAV — minimal, sticky on scroll
   </section>
 
   <!-- ==========================================================
+  09 · BOOKING — calendário + form + checkout (peça central)
+  =========================================================== -->
+  <section class="booking" id="agendar">
+    <div class="booking__grid">
+      <div class="booking__content">
+
+      <aside class="booking__aside">
+        <p class="eyebrow eyebrow--inverse">Agendar consulta</p>
+        <h2 class="booking__title">Uma consulta focada no que realmente importa: o seu caso.</h2>
+
+        <!-- Lista de benefícios — 4 ícones com microcopy -->
+        <ul class="booking__bullets" role="list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div>Consulta jurídica de <strong>1 hora</strong>, diretamente com o Dr. João Sousa Ferreira</div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg>
+            <div><strong>Online ou presencial</strong>, em Lisboa</div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M9 12h6M9 16h4M9 8h3"/></svg>
+            <div><strong>Análise prática do caso</strong> e esclarecimento das principais dúvidas</div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1018 0M3 12V4M3 12h8"/></svg>
+            <div><strong>Possibilidade de acompanhamento posterior</strong></div>
+          </li>
+        </ul>
+
+        <div class="booking__price">
+          <span class="booking__price-num">&euro;100,00 <span class="booking__price-vat">+ IVA</span></span>
+          <span class="booking__price-label">Possibilidade de reagendamento gratuito até 24h antes da consulta.</span>
+        </div>
+      </aside>
+
+      <!-- CALENDLY — embed inline. Disponibilidades reais + e-mails + sync calendário -->
+      <div class="booking__calendly">
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/jferreira-sfba/consultajuridica?primary_color=253239&hide_landing_page_details=1&hide_event_type_details=1"
+          style="min-width:320px;height:720px;"
+          data-track-calendly></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
   08 · FAQ — accordion clean, sem boxes
   =========================================================== -->
   <section class="faq" id="faq">
@@ -545,55 +590,6 @@ NAV — minimal, sticky on scroll
           </div>
         </details>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================
-  09 · BOOKING — calendário + form + checkout (peça central)
-  =========================================================== -->
-  <section class="booking" id="agendar">
-    <div class="booking__grid">
-      <div class="booking__content">
-
-      <aside class="booking__aside">
-        <p class="eyebrow eyebrow--inverse">Agendar consulta</p>
-        <h2 class="booking__title">Uma consulta focada no que realmente importa: o seu caso.</h2>
-
-        <!-- Lista de benefícios — 4 ícones com microcopy -->
-        <ul class="booking__bullets" role="list">
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            <div>Consulta jurídica de <strong>1 hora</strong>, diretamente com o Dr. João Sousa Ferreira</div>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg>
-            <div><strong>Online ou presencial</strong>, em Lisboa</div>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M9 12h6M9 16h4M9 8h3"/></svg>
-            <div><strong>Análise prática do caso</strong> e esclarecimento das principais dúvidas</div>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1018 0M3 12V4M3 12h8"/></svg>
-            <div><strong>Possibilidade de acompanhamento posterior</strong></div>
-          </li>
-        </ul>
-
-        <div class="booking__price">
-          <span class="booking__price-num">&euro;100,00 <span class="booking__price-vat">+ IVA</span></span>
-          <span class="booking__price-label">Possibilidade de reagendamento gratuito até 24h antes da consulta.</span>
-        </div>
-      </aside>
-
-      <!-- CALENDLY — embed inline. Disponibilidades reais + e-mails + sync calendário -->
-      <div class="booking__calendly">
-        <div
-          class="calendly-inline-widget"
-          data-url="https://calendly.com/jferreira-sfba/consultajuridica?primary_color=253239&hide_landing_page_details=1&hide_event_type_details=1"
-          style="min-width:320px;height:720px;"
-          data-track-calendly></div>
-      </div>
       </div>
     </div>
   </section>
