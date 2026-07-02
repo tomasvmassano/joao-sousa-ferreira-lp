@@ -63,21 +63,27 @@
   }
 
   // ==========================================================
-  // ANALYTICS — Meta Pixel (id 1609154350110510) com mapping para eventos standard
+  // ANALYTICS — Meta Pixel (id 1609154350110510)
+  //
+  // Hierarquia semântica dos eventos (para o algoritmo aprender bem):
+  //   PageView        — carregamento da página (automático via snippet no head)
+  //   ViewContent     — scroll até ao Calendly OU 30s+ na página (sinal de interesse)
+  //   InitiateCheckout— click num CTA "Agendar" (intenção, NÃO conversão)
+  //   Schedule        — calendly.event_scheduled (conversão real, agendamento feito)
+  //
+  // Nota: os CTAs disparavam "Lead" antes, o que fazia o algoritmo optimizar para
+  // cliques em vez de agendamentos. Substituído por InitiateCheckout — semanticamente
+  // mais correto e o algoritmo lida melhor com ele em campanhas de Sales/Leads.
   // ==========================================================
-  // Mapa de eventos internos (data-track="…") para eventos standard da Meta.
-  // Eventos standard são usados pela Meta para optimização automática de campanhas.
-  // Eventos não-mapeados ficam como trackCustom (visíveis no Events Manager mas
-  // sem o boost de optimização de bid).
   const STD_EVENT_MAP = {
-    // Intent: visitante a iniciar fluxo de marcação
-    hero_cta_click:        'Lead',
-    nav_cta_click:         'Lead',
-    sticky_cta_click:      'Lead',
-    mid_cta_click:         'Lead',
-    about_cta_click:       'Lead',
-    problems_cta_click:    'Lead',
-    // Conversion: marcação concluída via Calendly
+    // Intent: click num CTA "Agendar consulta" — abre/foca o Calendly
+    hero_cta_click:        'InitiateCheckout',
+    nav_cta_click:         'InitiateCheckout',
+    sticky_cta_click:      'InitiateCheckout',
+    mid_cta_click:         'InitiateCheckout',
+    about_cta_click:       'InitiateCheckout',
+    problems_cta_click:    'InitiateCheckout',
+    // Conversion: marcação confirmada via Calendly (event_scheduled)
     booking_confirmed:     'Schedule',
   };
   const track = (event, payload = {}) => {
@@ -98,14 +104,54 @@
     el.addEventListener('click', () => track(el.dataset.track));
   });
 
+  // ---------- ViewContent — dispara UMA vez por sessão, no primeiro dos triggers ----------
+  // Sinaliza interesse real (não só o load da página). Dispara quando:
+  //   (a) o utilizador faz scroll até à secção do Calendly, OU
+  //   (b) permanece 30s+ na página, o que aconteça primeiro.
+  let viewContentFired = false;
+  const fireViewContent = (source) => {
+    if (viewContentFired) return;
+    viewContentFired = true;
+    if (window.fbq) {
+      try {
+        window.fbq('track', 'ViewContent', {
+          content_name: 'Consulta jurídica',
+          content_category: 'Legal consultation',
+          source, // debug: 'scroll' ou 'time'
+        });
+      } catch (_) {}
+    }
+  };
+  // (a) Trigger por scroll — quando o Calendly entra em viewport
+  const bookingSection = document.getElementById('agendar');
+  if (bookingSection && 'IntersectionObserver' in window) {
+    const vcObserver = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          fireViewContent('scroll');
+          vcObserver.disconnect();
+          break;
+        }
+      }
+    }, { threshold: 0.25 });
+    vcObserver.observe(bookingSection);
+  }
+  // (b) Trigger por tempo — 30s na página
+  setTimeout(() => fireViewContent('time'), 30_000);
+
   // ---------- Calendly events → Meta Pixel ----------
-  // Calendly fires postMessage events ao window quando o utilizador interage
-  // com o widget inline. Capturamos os principais para tracking.
+  // Calendly envia eventos via postMessage ao window pai. Filtramos por origin
+  // https://calendly.com para garantir que só reagimos a mensagens do iframe correto
+  // (não a mensagens de outros scripts com o mesmo formato).
+  const isCalendlyEvent = (e) => (
+    e.origin === 'https://calendly.com'
+    && e.data && typeof e.data === 'object'
+    && typeof e.data.event === 'string'
+    && e.data.event.indexOf('calendly.') === 0
+  );
   window.addEventListener('message', (e) => {
-    if (!e.data || typeof e.data !== 'object') return;
-    const ev = e.data.event;
-    if (!ev || typeof ev !== 'string' || !ev.startsWith('calendly.')) return;
-    switch (ev) {
+    if (!isCalendlyEvent(e)) return;
+    switch (e.data.event) {
       case 'calendly.event_type_viewed':
         track('cal_widget_viewed');
         break;
@@ -113,7 +159,7 @@
         track('cal_slot_selected');
         break;
       case 'calendly.event_scheduled':
-        // CONVERSÃO — booking confirmado. Valor da consulta para optimização de bid.
+        // CONVERSÃO — booking confirmado. Standard event 'Schedule' com value.
         track('booking_confirmed', {
           value: 100,
           currency: 'EUR',
