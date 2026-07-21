@@ -1736,7 +1736,8 @@ legend { padding: 0; }
   .problems__item p { font-size: 1.15rem; }
 }
 
-/* PORQUÊ CONNOSCO — lista de valores em 2 colunas @ desktop */
+/* PORQUÊ CONNOSCO — lista de valores. 3-col @ desktop distribui 5 itens
+   em 3+2 (mais equilibrado que 2+2+1 que ficava com item órfão) */
 .why-us { padding: 6rem 0; }
 .why-us__values {
   display: grid;
@@ -1745,6 +1746,7 @@ legend { padding: 0; }
   list-style: none;
 }
 @media (min-width: 720px)  { .why-us__values { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .why-us__values { grid-template-columns: repeat(3, 1fr); } }
 .why-us__value {
   display: grid;
   grid-template-columns: 32px 1fr;
@@ -1819,15 +1821,15 @@ legend { padding: 0; }
   font-style: italic;
 }
 
-/* QUEM DEVE PREENCHER — checklist vs exclusion */
+/* QUEM DEVE PREENCHER — checklist 2-col @ desktop, exclusão span full-width */
 .qualify { padding: 6rem 0; }
 .qualify__list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: .8rem;
+  gap: .8rem 2.5rem;
   list-style: none;
-  max-width: 640px;
 }
+@media (min-width: 720px) { .qualify__list { grid-template-columns: repeat(2, 1fr); } }
 .qualify__item {
   display: grid;
   grid-template-columns: 24px 1fr;
@@ -1849,7 +1851,17 @@ legend { padding: 0; }
 }
 .qualify__item--yes .qualify__mark { background: var(--c-accent); }
 .qualify__item--no  .qualify__mark { background: var(--c-500); }
-.qualify__item--no  { color: var(--c-500); font-size: var(--fs-sm); font-style: italic; margin-top: 1rem; }
+/* Exclusão fica visualmente separada e ocupa a largura toda */
+.qualify__item--no {
+  grid-column: 1 / -1;
+  color: var(--c-500);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--c-300);
+  border-bottom: 0;
+}
 
 /* SOBRE — 2 blocos (SFBA + João) dentro do about__content */
 .about__block {
