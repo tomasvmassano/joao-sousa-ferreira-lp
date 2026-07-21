@@ -21,7 +21,7 @@
   // ---------- sticky CTA visibility ----------
   const stickyCta = document.querySelector('[data-sticky-cta]');
   const heroEl = document.querySelector('.hero');
-  const bookingEl = document.getElementById('agendar');
+  const bookingEl = document.getElementById('formulario');
 
   if (stickyCta && 'IntersectionObserver' in window) {
     const heroObserver = new IntersectionObserver((entries) => {
@@ -44,7 +44,7 @@
 
   // ---------- reveal on scroll ----------
   const revealTargets = document.querySelectorAll(
-    '.section-head, .problems__item, .problems__cta, .howto__step, .area, .about__content > *, .faq__item, .booking__aside, .booking__calendly'
+    '.section-head, .problems__item, .problems__cta, .howto__step, .why-us__value, .cases__item, .qualify__item, .about__block, .about__content > *, .faq__item, .booking__aside, .booking__form-embed'
   );
   revealTargets.forEach(el => el.classList.add('reveal'));
 
@@ -65,26 +65,24 @@
   // ==========================================================
   // ANALYTICS — Meta Pixel (id 1609154350110510)
   //
-  // Hierarquia semântica dos eventos (para o algoritmo aprender bem):
-  //   PageView        — carregamento da página (automático via snippet no head)
-  //   ViewContent     — scroll até ao Calendly OU 30s+ na página (sinal de interesse)
-  //   InitiateCheckout— click num CTA "Agendar" (intenção, NÃO conversão)
-  //   Schedule        — calendly.event_scheduled (conversão real, agendamento feito)
+  // Hierarquia semântica (para o algoritmo aprender bem):
+  //   PageView        — load da página (auto via snippet no <head>)
+  //   ViewContent     — scroll até ao formulário OU 30s+ na página (interesse)
+  //   InitiateCheckout— click num CTA "Quero saber mais / Solicitar contacto" (intenção)
+  //   Lead            — submit do formulário GHL (conversão real)
   //
-  // Nota: os CTAs disparavam "Lead" antes, o que fazia o algoritmo optimizar para
-  // cliques em vez de agendamentos. Substituído por InitiateCheckout — semanticamente
-  // mais correto e o algoritmo lida melhor com ele em campanhas de Sales/Leads.
+  // Nota: modelo mudou de "consulta única" (Calendly + Schedule) para "sessão gratuita
+  // → retainer" (formulário GHL + Lead). Schedule já não faz sentido semantically.
   // ==========================================================
   const STD_EVENT_MAP = {
-    // Intent: click num CTA "Agendar consulta" — abre/foca o Calendly
+    // Intent: click em qualquer CTA que aponta para o formulário
     hero_cta_click:        'InitiateCheckout',
     nav_cta_click:         'InitiateCheckout',
     sticky_cta_click:      'InitiateCheckout',
-    mid_cta_click:         'InitiateCheckout',
     about_cta_click:       'InitiateCheckout',
     problems_cta_click:    'InitiateCheckout',
-    // Conversion: marcação confirmada via Calendly (event_scheduled)
-    booking_confirmed:     'Schedule',
+    // Conversão: form GHL submetido
+    form_submitted:        'Lead',
   };
   const track = (event, payload = {}) => {
     const stdEvent = STD_EVENT_MAP[event];
@@ -105,9 +103,9 @@
   });
 
   // ---------- ViewContent — dispara UMA vez por sessão, no primeiro dos triggers ----------
-  // Sinaliza interesse real (não só o load da página). Dispara quando:
-  //   (a) o utilizador faz scroll até à secção do Calendly, OU
-  //   (b) permanece 30s+ na página, o que aconteça primeiro.
+  // Sinaliza interesse real (não só o load). Dispara quando:
+  //   (a) utilizador faz scroll até à secção do formulário, OU
+  //   (b) permanece 30s+ na página — o que vier primeiro.
   let viewContentFired = false;
   const fireViewContent = (source) => {
     if (viewContentFired) return;
@@ -115,16 +113,16 @@
     if (window.fbq) {
       try {
         window.fbq('track', 'ViewContent', {
-          content_name: 'Consulta jurídica',
-          content_category: 'Legal consultation',
-          source, // debug: 'scroll' ou 'time'
+          content_name: 'Departamento jurídico externo',
+          content_category: 'Legal services',
+          source,
         });
       } catch (_) {}
     }
   };
-  // (a) Trigger por scroll — quando o Calendly entra em viewport
-  const bookingSection = document.getElementById('agendar');
-  if (bookingSection && 'IntersectionObserver' in window) {
+  // (a) Scroll — quando o formulário entra em viewport
+  const formSection = document.getElementById('formulario');
+  if (formSection && 'IntersectionObserver' in window) {
     const vcObserver = new IntersectionObserver((entries) => {
       for (const e of entries) {
         if (e.isIntersecting) {
@@ -134,39 +132,30 @@
         }
       }
     }, { threshold: 0.25 });
-    vcObserver.observe(bookingSection);
+    vcObserver.observe(formSection);
   }
-  // (b) Trigger por tempo — 30s na página
+  // (b) Tempo — 30s na página
   setTimeout(() => fireViewContent('time'), 30_000);
 
-  // ---------- Calendly events → Meta Pixel ----------
-  // Calendly envia eventos via postMessage ao window pai. Filtramos por origin
-  // https://calendly.com para garantir que só reagimos a mensagens do iframe correto
-  // (não a mensagens de outros scripts com o mesmo formato).
-  const isCalendlyEvent = (e) => (
-    e.origin === 'https://calendly.com'
+  // ---------- GHL form submit → Meta Pixel Lead ----------
+  // O widget GHL (LeadConnector) envia eventos postMessage ao window quando o
+  // formulário é submetido com sucesso. Escutamos e disparamos 'Lead'.
+  // Origin oficial dos iframes GHL: https://api.leadconnectorhq.com
+  const isGhlFormEvent = (e) => (
+    e.origin === 'https://api.leadconnectorhq.com'
     && e.data && typeof e.data === 'object'
-    && typeof e.data.event === 'string'
-    && e.data.event.indexOf('calendly.') === 0
   );
   window.addEventListener('message', (e) => {
-    if (!isCalendlyEvent(e)) return;
-    switch (e.data.event) {
-      case 'calendly.event_type_viewed':
-        track('cal_widget_viewed');
-        break;
-      case 'calendly.date_and_time_selected':
-        track('cal_slot_selected');
-        break;
-      case 'calendly.event_scheduled':
-        // CONVERSÃO — booking confirmado. Standard event 'Schedule' com value.
-        track('booking_confirmed', {
-          value: 100,
-          currency: 'EUR',
-          content_name: 'Consulta jurídica',
-          content_category: 'Legal consultation',
-        });
-        break;
+    if (!isGhlFormEvent(e)) return;
+    // Estrutura típica dos eventos GHL: e.data.type === 'form_submit' ou
+    // 'form_submitted'. Fazemos match flexível para cobrir variantes.
+    const type = String(e.data.type || e.data.event || '').toLowerCase();
+    if (type.includes('form') && type.includes('submit')) {
+      // CONVERSÃO — lead qualificado submeteu o form
+      track('form_submitted', {
+        content_name: 'Departamento jurídico externo',
+        content_category: 'Legal services',
+      });
     }
   });
 
