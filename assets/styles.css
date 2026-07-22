@@ -1764,10 +1764,15 @@ legend { padding: 0; }
   display: grid;
   grid-template-columns: 24px 1fr;
   gap: .9rem;
-  align-items: center;
+  /* align-items: start alinha o check com o topo do bloco (= título),
+     em vez de centrar no meio do bloco todo, o que deixava o check
+     visualmente flutuante entre título e descrição. */
+  align-items: start;
   padding: 1.2rem 0;
   border-top: var(--line);
 }
+/* Nudge para o centro do check coincidir com o centro óptico do título */
+.why-us__check { margin-top: 3px; }
 /* Mesmas dimensões e proporções que .qualify__mark para consistência visual:
    círculo 24px, check 18px = 75% de preenchimento (era 20/32 = 62%, ficava
    com o check pequeno e visualmente descentrado dentro do círculo maior) */
