@@ -35,7 +35,7 @@ alt=""/></noscript>
 <link rel="preconnect" href="https://link.msgsndr.com" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.prod.website-files.com/6919d87fb59aea89ebd7268e/6919d880b59aea89ebd7285d_BDOGrotesk-Regular.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.prod.website-files.com/6919d87fb59aea89ebd7268e/6919d880b59aea89ebd7285b_BDOGrotesk-Bold.woff2">
-<link rel="stylesheet" href="assets/styles.css?v=15">
+<link rel="stylesheet" href="assets/styles.css?v=16">
 </head>
 <body>
 
@@ -76,8 +76,9 @@ NAV — minimal, sticky on scroll
         </h1>
 
         <p class="hero__sub">
-          Trabalhamos como departamento jurídico de empresas em crescimento, ajudando-as a
-          prevenir riscos, negociar contratos, proteger a operação e tomar decisões com confiança.
+          Trabalhamos como departamento jurídico externo de empresas em crescimento,
+          ajudando-as a prevenir riscos, negociar contratos, proteger a operação e
+          tomar decisões com confiança.
         </p>
 
         <div class="hero__actions">
@@ -87,33 +88,27 @@ NAV — minimal, sticky on scroll
               <path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="#formulario" class="btn btn--ghost btn--lg" data-track="hero_secondary_click">
-            Solicitar contacto
-          </a>
         </div>
 
       </div>
 
-      <div class="hero__visual">
-        <div class="portrait portrait--hero">
-          <div class="portrait__frame">
-            <img
-              src="assets/img/joao.jpg"
-              srcset="assets/img/joao-md.jpg 457w, assets/img/joao.jpg 915w"
-              sizes="(max-width: 720px) 80vw, 360px"
-              alt="João Sousa Ferreira, advogado"
-              class="portrait__img"
-              width="915" height="1600"
-              loading="eager"
-              fetchpriority="high">
-          </div>
-          <div class="portrait__caption">
-            <span class="portrait__role">João Sousa Ferreira</span>
-            <span class="portrait__sub">Advogado &middot; Sócio da SFBA &mdash; Sociedade de Advogados</span>
-          </div>
-        </div>
-      </div>
+    </div>
+  </section>
 
+  <!-- ==========================================================
+  01B · VSL — vídeo horizontal a seguir ao hero (peça central de conversão)
+  =========================================================== -->
+  <section class="vsl" aria-label="Vídeo de apresentação">
+    <div class="vsl__inner">
+      <video
+        class="vsl__player"
+        poster="assets/img/vsl-poster.jpg"
+        controls
+        preload="metadata"
+        playsinline
+        width="1920" height="1080">
+        <source src="assets/video/vsl.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
@@ -202,7 +197,7 @@ NAV — minimal, sticky on scroll
         <li class="howto__step">
           <span class="howto__num">04</span>
           <h3 class="howto__title">Proposta de acompanhamento</h3>
-          <p class="howto__desc">Se fizer sentido para ambas as partes, apresentar-lhe-emos uma proposta clara e à medida da sua empresa.</p>
+          <p class="howto__desc">Se fizer sentido para ambas as partes, apresentaremos uma proposta clara e à medida da sua empresa.</p>
         </li>
       </ol>
       </div>
@@ -370,24 +365,14 @@ NAV — minimal, sticky on scroll
       <div class="about__visual">
         <div class="portrait portrait--about">
           <div class="portrait__frame">
-            <!-- VÍDEO de apresentação — H.264 540×960, 7.4 MB, faststart -->
-            <video
-              class="portrait__video"
-              poster="assets/img/joao-video-poster.jpg"
-              controls
-              preload="metadata"
-              playsinline
-              width="540" height="960"
-              aria-label="João Sousa Ferreira — vídeo de apresentação">
-              <source src="assets/video/joao-intro.mp4" type="video/mp4">
-              <!-- Fallback se o vídeo não carregar -->
-              <img
-                src="assets/img/joao-video-poster.jpg"
-                alt="João Sousa Ferreira, advogado"
-                class="portrait__img"
-                width="720" height="1280"
-                loading="lazy">
-            </video>
+            <img
+              src="assets/img/joao.jpg"
+              srcset="assets/img/joao-md.jpg 457w, assets/img/joao.jpg 915w"
+              sizes="(max-width: 960px) 80vw, 460px"
+              alt="João Sousa Ferreira, advogado"
+              class="portrait__img"
+              width="915" height="1600"
+              loading="lazy">
           </div>
         </div>
       </div>
@@ -458,6 +443,21 @@ NAV — minimal, sticky on scroll
       <aside class="booking__aside">
         <p class="eyebrow eyebrow--inverse">Solicitar contacto</p>
         <h2 class="booking__title">Vamos conhecer a sua empresa.</h2>
+
+        <ul class="booking__bullets" role="list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><strong>Sessão estratégica gratuita</strong></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l6 6-6 6M14 6l6 6-6 6"/></svg>
+            <div><strong>Sem obrigação de contratação</strong></div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 3v4M17 3v4M3 11h18"/></svg>
+            <div><strong>Contacto em menos de 24h</strong></div>
+          </li>
+        </ul>
       </aside>
 
       <!-- GHL — inline form embed. Leads vão diretos para GoHighLevel -->
@@ -554,25 +554,6 @@ NAV — minimal, sticky on scroll
     </div>
   </section>
 
-  <!-- ==========================================================
-  10 · CONTACTO FORA DO STANDARD — discreto
-  =========================================================== -->
-  <section class="contact" aria-label="Contactos alternativos">
-    <div class="container contact__inner">
-      <p class="contact__lead">Para situações que exijam enquadramento prévio ou acompanhamento específico, contacte diretamente o escritório:</p>
-      <div class="contact__channels">
-        <a href="mailto:jferreira@sfba.pt" class="contact__channel">
-          <span>E-mail</span>
-          <strong>jferreira@sfba.pt</strong>
-        </a>
-        <span class="contact__divider" aria-hidden="true"></span>
-        <a href="tel:+351211382748" class="contact__channel">
-          <span>Telefone</span>
-          <strong>+351 211 382 748</strong>
-        </a>
-      </div>
-    </div>
-  </section>
 
 </main>
 
@@ -580,7 +561,7 @@ NAV — minimal, sticky on scroll
 FOOTER LEGAL
 =========================================================== -->
 <footer class="footer">
-  <div class="footer__inner footer__inner--three">
+  <div class="footer__inner footer__inner--two">
     <div class="footer__col footer__col--brand">
       <span class="footer__brand">João Sousa Ferreira</span>
       <p class="footer__small">
@@ -595,13 +576,6 @@ FOOTER LEGAL
       <a href="#privacidade">Política de Privacidade</a>
       <a href="#termos">Termos do serviço</a>
       <a href="#cookies">Política de Cookies</a>
-    </div>
-
-    <div class="footer__col">
-      <span class="footer__heading">Contactos</span>
-      <a href="mailto:jferreira@sfba.pt">jferreira@sfba.pt</a>
-      <a href="tel:+351211382748">+351&nbsp;211&nbsp;382&nbsp;748</a>
-      <a href="https://sfba.pt" target="_blank" rel="noopener">sfba.pt</a>
     </div>
   </div>
   <p class="footer__copy">&copy; <span data-year></span> João Sousa Ferreira. Todos os direitos reservados.</p>
@@ -627,7 +601,7 @@ FOOTER LEGAL
   </div>
 </aside>
 
-<script src="assets/script.js?v=15" defer></script>
+<script src="assets/script.js?v=16" defer></script>
 <script src="https://link.msgsndr.com/js/form_embed.js" async></script>
 </body>
 </html>
