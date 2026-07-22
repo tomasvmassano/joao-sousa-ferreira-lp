@@ -1773,25 +1773,17 @@ legend { padding: 0; }
 }
 /* Nudge para o centro do check coincidir com o centro óptico do título */
 .why-us__check { margin-top: 3px; }
-/* Mesmas dimensões e proporções que .qualify__mark para consistência visual:
-   círculo 24px, check 18px = 75% de preenchimento (era 20/32 = 62%, ficava
-   com o check pequeno e visualmente descentrado dentro do círculo maior) */
+/* Check sem círculo de fundo, em azul (accent). Alinha visualmente com o qualify. */
 .why-us__check {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 24px; height: 24px;
-  color: var(--c-white);
-  background: var(--c-accent);
-  border-radius: 50%;
+  color: var(--c-accent);
   flex: none;
   line-height: 0;
 }
-.why-us__check svg {
-  display: block;
-  width: 18px;
-  height: 18px;
-}
+.why-us__check svg { display: block; }
 .why-us__value strong {
   display: block;
   font-size: var(--fs-md);
