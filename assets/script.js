@@ -81,8 +81,9 @@
     sticky_cta_click:      'InitiateCheckout',
     about_cta_click:       'InitiateCheckout',
     problems_cta_click:    'InitiateCheckout',
-    // Conversão: form GHL submetido
-    form_submitted:        'Lead',
+    // Lead já NÃO está no mapa — é disparado via window.JSFTrackLead(eventId)
+    // com eventID explícito (ver bloco "Lead trigger" mais abaixo). Isto permite
+    // deduplicação server-side com Conversions API quando esta existir.
   };
   const track = (event, payload = {}) => {
     const stdEvent = STD_EVENT_MAP[event];
@@ -137,26 +138,67 @@
   // (b) Tempo — 30s na página
   setTimeout(() => fireViewContent('time'), 30_000);
 
-  // ---------- GHL form submit → Meta Pixel Lead ----------
-  // O widget GHL (LeadConnector) envia eventos postMessage ao window quando o
-  // formulário é submetido com sucesso. Escutamos e disparamos 'Lead'.
-  // Origin oficial dos iframes GHL: https://api.leadconnectorhq.com
-  const isGhlFormEvent = (e) => (
-    e.origin === 'https://api.leadconnectorhq.com'
-    && e.data && typeof e.data === 'object'
-  );
+  // ==========================================================
+  // Lead trigger — spec SFBA 23/10/2026 (JSF_Correcao_Evento_Lead)
+  //
+  // 1) Helper global idempotente: dispara 'Lead' uma única vez por event_id,
+  //    com eventID explícito (preparado para deduplicação com CAPI).
+  // 2) Listener para o iframe GHL: só dispara em callbacks de SUCESSO
+  //    confirmado (não em click do botão, não em erros de validação).
+  //
+  // Critério de aceitação: 1 submissão real = 1 evento Lead.
+  //   - NÃO dispara ao carregar a página
+  //   - NÃO dispara ao clicar em "enviar" com campos inválidos
+  //   - NÃO dispara ao ocorrer erro no envio
+  // ==========================================================
+  window.JSFTrackLead = (() => {
+    const enviados = new Set();
+    return (eventId) => {
+      if (!eventId || enviados.has(eventId)) return;
+      if (typeof window.fbq !== 'function') return;
+      enviados.add(eventId);
+      // Payload vazio deliberadamente — Meta recomenda não enviar PII do form
+      // (nome/e-mail/telefone/empresa) sem base legal e configuração de
+      // privacidade apropriadas. O eventID permite dedup com CAPI quando esta
+      // for implementada do lado do servidor.
+      window.fbq('track', 'Lead', {}, { eventID: eventId });
+    };
+  })();
+
+  // Listener do iframe GHL (origin oficial: api.leadconnectorhq.com).
+  // Match apenas em tipos de SUCCESS — nunca em click/submit genérico que
+  // poderia ocorrer antes da confirmação do servidor.
+  //
+  // Nota: a configuração ideal é o iframe GHL enviar postMessage com
+  // { type: 'JSF_FORM_SUCCESS', event_id: '<id>' } no callback de sucesso.
+  // Enquanto isso, fazemos match aos tipos nativos conhecidos do GHL.
   window.addEventListener('message', (e) => {
-    if (!isGhlFormEvent(e)) return;
-    // Estrutura típica dos eventos GHL: e.data.type === 'form_submit' ou
-    // 'form_submitted'. Fazemos match flexível para cobrir variantes.
-    const type = String(e.data.type || e.data.event || '').toLowerCase();
-    if (type.includes('form') && type.includes('submit')) {
-      // CONVERSÃO — lead qualificado submeteu o form
-      track('form_submitted', {
-        content_name: 'Departamento jurídico externo',
-        content_category: 'Legal services',
-      });
-    }
+    if (e.origin !== 'https://api.leadconnectorhq.com') return;
+    if (!e.data || typeof e.data !== 'object') return;
+
+    const type = String(
+      e.data.type || e.data.event || e.data.action || ''
+    ).toLowerCase();
+
+    const isSuccess = (
+      type === 'jsf_form_success'            // nosso padrão (spec SFBA)
+      || type.includes('form_submit_success')// variante GHL
+      || type.includes('form_submitted')     // variante GHL
+      || type.includes('form_success')       // variante genérica
+      || (e.data.success === true && type.includes('form')) // flag explícita
+    );
+    if (!isSuccess) return;
+
+    // Prioriza event_id vindo do servidor (necessário para dedup com CAPI).
+    // Fallback para UUID local quando não existe.
+    const eventId = e.data.event_id
+                 || e.data.eventId
+                 || e.data.submission_id
+                 || ('jsf_lead_' + (crypto.randomUUID
+                                     ? crypto.randomUUID()
+                                     : Date.now() + '_' + Math.random().toString(36).slice(2)));
+
+    window.JSFTrackLead(eventId);
   });
 
   // ---------- cookie banner (Consent Mode v2 stub) ----------
