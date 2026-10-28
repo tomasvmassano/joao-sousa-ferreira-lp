@@ -165,35 +165,72 @@
     };
   })();
 
-  // Listener do iframe GHL (origin oficial: api.leadconnectorhq.com).
-  // Match apenas em tipos de SUCCESS — nunca em click/submit genérico que
-  // poderia ocorrer antes da confirmação do servidor.
-  //
-  // Nota: a configuração ideal é o iframe GHL enviar postMessage com
-  // { type: 'JSF_FORM_SUCCESS', event_id: '<id>' } no callback de sucesso.
-  // Enquanto isso, fazemos match aos tipos nativos conhecidos do GHL.
+  // Listener do iframe GHL.
+  // Nota de diagnóstico: o GHL pode usar sub-origens (ex. widget.leadconnectorhq.com,
+  // msgsndr.com, services.leadconnectorhq.com) e payloads variáveis. Para evitar
+  // perder submissões, aceitamos qualquer origem que termine em leadconnectorhq.com
+  // ou msgsndr.com, e logamos SEMPRE o payload em window.__jsf_ghl_msgs para
+  // podermos ver a forma real do callback no console.
+  window.__jsf_ghl_msgs = window.__jsf_ghl_msgs || [];
+
+  const isGhlOrigin = (origin) => {
+    try {
+      const u = new URL(origin);
+      const h = u.hostname;
+      return h === 'api.leadconnectorhq.com'
+          || h.endsWith('.leadconnectorhq.com')
+          || h.endsWith('.msgsndr.com')
+          || h === 'msgsndr.com';
+    } catch (_) { return false; }
+  };
+
   window.addEventListener('message', (e) => {
-    if (e.origin !== 'https://api.leadconnectorhq.com') return;
-    if (!e.data || typeof e.data !== 'object') return;
+    if (!isGhlOrigin(e.origin)) return;
+
+    // Diagnóstico: guarda o payload completo para inspeção no DevTools.
+    try {
+      window.__jsf_ghl_msgs.push({ origin: e.origin, data: e.data, t: Date.now() });
+      if (window.__jsf_ghl_msgs.length > 50) window.__jsf_ghl_msgs.shift();
+      // eslint-disable-next-line no-console
+      console.log('[JSF][GHL postMessage]', e.origin, e.data);
+    } catch (_) {}
+
+    if (!e.data) return;
+
+    // Normaliza payload: pode vir string, pode vir objecto.
+    let payload = e.data;
+    if (typeof payload === 'string') {
+      try { payload = JSON.parse(payload); } catch (_) { /* keep string */ }
+    }
+    if (typeof payload !== 'object' || payload === null) return;
 
     const type = String(
-      e.data.type || e.data.event || e.data.action || ''
+      payload.type || payload.event || payload.action || payload.name || ''
     ).toLowerCase();
 
+    // Serializa o payload inteiro em lowercase para fazer match "contains"
+    // em qualquer campo (defensivo contra variações do GHL).
+    let flat = '';
+    try { flat = JSON.stringify(payload).toLowerCase(); } catch (_) {}
+
     const isSuccess = (
-      type === 'jsf_form_success'            // nosso padrão (spec SFBA)
-      || type.includes('form_submit_success')// variante GHL
-      || type.includes('form_submitted')     // variante GHL
-      || type.includes('form_success')       // variante genérica
-      || (e.data.success === true && type.includes('form')) // flag explícita
+      type === 'jsf_form_success'
+      || type.includes('form_submit_success')
+      || type.includes('form_submitted')
+      || type.includes('form_success')
+      || type === 'submitted'
+      || type === 'success'
+      || (payload.success === true && (type.includes('form') || flat.includes('form')))
+      || flat.includes('"form_submit_success"')
+      || flat.includes('"formsubmitsuccess"')
+      || flat.includes('"formsubmitted"')
     );
     if (!isSuccess) return;
 
-    // Prioriza event_id vindo do servidor (necessário para dedup com CAPI).
-    // Fallback para UUID local quando não existe.
-    const eventId = e.data.event_id
-                 || e.data.eventId
-                 || e.data.submission_id
+    const eventId = payload.event_id
+                 || payload.eventId
+                 || payload.submission_id
+                 || payload.submissionId
                  || ('jsf_lead_' + (crypto.randomUUID
                                      ? crypto.randomUUID()
                                      : Date.now() + '_' + Math.random().toString(36).slice(2)));
